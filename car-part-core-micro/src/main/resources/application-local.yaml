@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: car-part-core-micro
+# https://vladmihalcea.com/spring-boot-application-properties/
+
+# datasource connection
+  datasource:
+    url: jdbc:postgresql://localhost:5432/warehouse
+    username: ginitoru
+    password: 1234
+
+# HikariCP config
+    hikari:
+      minimum-idle: 0
+      maximum-pool-size: 40
+      max-lifetime: 900000
+      transaction-isolation: TRANSACTION_READ_COMMITTED
+      auto-commit: false # want to acquire the database connection lazily and not at the beginning of the @Transactional method
+      data-source-properties:
+        useServerPrepStmts: false
+        cachePrepStmts: true
+        prepStmtCacheSize: 500
+        prepStmtCacheSqlLimit: 1024
+
+# JPA config
+  jpa:
+    hibernate:
+#      ddl-auto: none
+      ddl-auto: update #just for the beginning to see how the database tables are created
+    show-sql: false # I use another library to see the SQL queries
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+          batch_size: 15 # batch size for one single trip recommended values between (5 - 30)
+          order_inserts: true
+          order_updates: true
+          batch_versioned_data: true # https://vladmihalcea.com/how-to-batch-insert-and-update-statements-with-hibernate/
+        connection:
+          provider_disables_autocommit: true
+        query:
+          in_clause_parameter_padding: true
+          fail_on_pagination_over_collection_fetch: true
+          plan_cache_max_size: 4096

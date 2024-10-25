@@ -1,0 +1,17 @@
+version: '3.8'
+
+#postgres -----------------------------------------------------
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: ginitoru
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: warehouse
+    volumes:
+      - postgres-volume:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+volumes:
+  postgres-volume:
