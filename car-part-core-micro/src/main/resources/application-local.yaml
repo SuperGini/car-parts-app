@@ -28,8 +28,8 @@ spring:
 # JPA config
   jpa:
     hibernate:
-#      ddl-auto: none
-      ddl-auto: update #just for the beginning to see how the database tables are created
+      ddl-auto: none
+#      ddl-auto: update #just for the beginning to see how the database tables are created
     show-sql: false # I use another library to see the SQL queries
     open-in-view: false
     properties:
@@ -46,3 +46,7 @@ spring:
           in_clause_parameter_padding: true
           fail_on_pagination_over_collection_fetch: true
           plan_cache_max_size: 4096
+
+# for liquibase to know how to load the changelog files
+  liquibase:
+    change-log: classpath:/liquibase/master.xml

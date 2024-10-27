@@ -1,0 +1,77 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Super_Gini" id="2024-10-27-001">
+        <createTable tableName="price">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="price_pkey"/>
+            </column>
+            <column name="currency" type="VARCHAR(5)"/>
+            <column name="price" type="numeric(20, 2)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Super_Gini (generated)" id="2024-10-27-002">
+        <createTable tableName="part">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="part_pkey"/>
+            </column>
+            <column name="price" type="VARCHAR(255)"/>
+            <column name="part_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="car_id" type="VARCHAR(36)"/>
+            <column name="part_manufacturer_id" type="VARCHAR(255)"/>
+            <column name="price_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Super_Gini" id="2024-10-27-003">
+        <createTable tableName="car_manufacturer">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="car_manufacturer_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="car_id" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Super_Gini" id="2024-10-27-004">
+        <addUniqueConstraint columnNames="part_number" constraintName="uk2tjpyelhdjx8q1smwh9s3cq75" tableName="part"/>
+    </changeSet>
+    <changeSet author="Super_Gini" id="2024-10-27-005">
+        <addUniqueConstraint columnNames="price_id" constraintName="ukcnnmhrxntopsdny0tcpuf868t" tableName="part"/>
+    </changeSet>
+    <changeSet author="Super_Gini" id="2024-10-27-006">
+        <addUniqueConstraint columnNames="car_id" constraintName="uks85542t9grte85kp5m143xt5i" tableName="car_manufacturer"/>
+    </changeSet>
+    <changeSet author="Super_Gini" id="2024-10-27-007">
+        <createTable tableName="car">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="car_pkey"/>
+            </column>
+            <column name="model" type="VARCHAR(255)"/>
+            <column name="production_end_year" type="date"/>
+            <column name="production_start_year" type="date"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Super_Gini" id="2024-10-27-008">
+        <createTable tableName="part_manufacturer">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="part_manufacturer_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="Super_Gini" id="2024-10-27-009">
+        <addForeignKeyConstraint baseColumnNames="price_id" baseTableName="part" constraintName="fk5w4xfwcxtbm517b9h5o37wri5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="price" validate="true"/>
+    </changeSet>
+    <changeSet author="Super_Gini" id="2024-10-27-010">
+        <addForeignKeyConstraint baseColumnNames="car_id" baseTableName="part" constraintName="fk9rucex7i5udnpy4fdhrpoi2ln" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="car" validate="true"/>
+    </changeSet>
+    <changeSet author="Super_Gini" id="2024-10-27-011">
+        <addForeignKeyConstraint baseColumnNames="part_manufacturer_id" baseTableName="part" constraintName="fkf9j45fs4yrf77ddhs7b1uc30j" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="part_manufacturer" validate="true"/>
+    </changeSet>
+    <changeSet author="Super_Gini" id="2024-10-27-012">
+        <addForeignKeyConstraint baseColumnNames="car_id" baseTableName="car_manufacturer" constraintName="fkhcw48xupkbehjf4uk35uxm1uk" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="car" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
