@@ -1,0 +1,477 @@
+openapi: 3.0.3
+info:
+  title: car-part-core openapi spec
+  description: |-
+    Interface that is used to add and retrieve parts information from the database
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: blabla@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: car
+    description: Endpoints for cars and cars manufacturers
+  - name: part
+    description: Endpoints for parts and parts manufacturers
+paths:
+  /part/part-manufacturer:
+    post:
+      tags:
+        - part
+      summary: Add a new part manufacturer
+      operationId: createPartManufacturer
+      requestBody:
+        description: Adds a new part manufacturer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartManufacturerRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartManufacturerResponse'
+# https://stackoverflow.com/questions/43314384/different-examples-for-same-model-in-swagger
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+# multiple error examples
+              examples:
+                InvalidName:
+                  value:
+                    message: Invalid manufacturer name
+                    status: 400
+                ManufacturerAlreadyExists:
+                  value:
+                    message: Manufacturer already exists
+                    status: 400
+
+  /part:
+    post:
+      tags:
+        - part
+      summary: Adds a part
+      description: Adds a new part in the database
+      operationId: createPart
+      requestBody:
+        description: Adds a new part
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidPartFields:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                PartAlreadyExists:
+                  value:
+                    message: Part already exists
+                    status: 400
+
+  /part/{id}:
+    get:
+      tags:
+        - part
+      summary: Retrieves a part
+      description: Retrieves a new part from the database
+      operationId: findPartById
+      parameters:
+        - name: id
+          in: path
+          description: Part id that we are looking for
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidPartId:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                PartAlreadyExists:
+                  value:
+                    message: Part already exists
+                    status: 400
+        '404':
+          description: Not found exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                PartNotfound:
+                  value:
+                    message: Part not found
+                    status: 404
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /car:
+    post:
+      tags:
+        - car
+      summary: Adds a car
+      description: Adds a new car in the database
+      operationId: createCar
+      requestBody:
+        description: Adds a new car
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidCarFields:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                CarAlreadyExists:
+                  value:
+                    message: Car already exists
+                    status: 400
+  /car/car-manufacturer:
+    post:
+      tags:
+        - car
+      summary: Add a new car manufacturer
+      description: Adds a new car manufacturer in the database
+      operationId: createCarManufacturer
+      requestBody:
+        description: Adds a new car manufacturer
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarManufacturerRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarManufacturerResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidCarManufacturerFields:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                CarManufacturerAlreadyExists:
+                  value:
+                    message: Car already exists
+                    status: 400
+                CarManufacturerNameRequired:
+                  value:
+                    message: Car name required
+                    status: 400
+
+  /car/{id}:
+    post:
+      tags:
+        - car
+      summary: Retrieves a car
+      description: Retrieves a new car in the database
+      operationId: findCarById
+      parameters:
+        - name: id
+          in: path
+          description: Part id that we are looking for
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CarResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidCarFields:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                CarAlreadyExists:
+                  value:
+                    message: Car already exists
+                    status: 400
+        '404':
+          description: Not found exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                PartNotfound:
+                  value:
+                    message: Car not found
+                    status: 404
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    PartManufacturerRequest:
+      required:
+        - name
+      type: object
+      properties:
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9-]{1,20}$
+          example: SKF
+          description: Name of the part manufacturer
+    PartManufacturerResponse:
+      required:
+        - name
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9-]{1,20}$
+          example: SKF
+          description: Name of the part manufacturer
+    PartRequest:
+      required:
+        - name
+        - partNumber
+        - carId
+        - manufacturerId
+        - price
+      type: object
+      properties:
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9\s-]{1,45}$
+          example: front fender
+        partNumber:
+          type: string
+          pattern: ^[a-zA-Z0-9\s-]{1,60}$
+          example: 125-vf4-cffA-24
+          description: identification number of the part
+        carId:
+          type: string
+          format: uuid
+        manufacturerId:
+          type: string
+          format: uuid
+        price:
+          $ref: '#/components/schemas/PriceRequest'
+    PriceRequest:
+      required:
+        - currency
+        - price
+      properties:
+        currency:
+          $ref: '#/components/schemas/Currency'
+        price:
+          type: number
+          example: 145.20
+    Currency:
+      type: string
+      description: Allowed currency
+      enum:
+        - RON
+        - EUR
+        - USD
+    PartResponse:
+      required:
+        - id
+        - name
+        - partNumber
+        - price
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: part id
+        name:
+          type: string
+          example: front fender
+          description: name of car part
+        partNumber:
+          type: string
+          example: 125-vf4-cffA-24
+          description: identification number of the part
+        price:
+          $ref: '#/components/schemas/PriceResponse'
+    PriceResponse:
+      required:
+        - currency
+        - price
+      properties:
+        currency:
+          $ref: '#/components/schemas/Currency'
+        price:
+          type: number
+          example: 145.20
+    CarRequest:
+      required:
+        - model
+        - productionStartYear
+        - productionEndYear
+        - carManufacturerId
+      properties:
+        model:
+          type: string
+          pattern: ^[a-zA-Z0-9\s-]{1,60}$
+          example: Focus
+          description: car model name
+        productionStartYear:
+          type: string
+          format: date
+          description: the year when the production of the model started
+        productionEndYear:
+          type: string
+          format: date
+          description: the year when the production of the model ended
+        carManufacturerId:
+          type: string
+          format: uuid
+          description: car manufacturer id from database
+
+    CarResponse:
+      required:
+        - id
+        - model
+        - productionStartYear
+        - productionEndYear
+        - carManufacturer
+      properties:
+        id:
+          type: string
+          format: uuid
+        model:
+          type: string
+          example: Focus
+        productionStartYear:
+          type: string
+          format: date
+        productionEndYear:
+          type: string
+          format: date
+        carManufacturer:
+          type: string
+          example: Ford
+    CarManufacturerRequest:
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9\s-]{1,60}$
+          example: Ford
+          description: name of the car manufacturer
+    CarManufacturerResponse:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: identifier of the car manufacturer
+        name:
+          type: string
+          pattern: ^[a-zA-Z0-9\s-]{1,60}$
+          example: Ford
+          description: name of the car manufacturer
+    ErrorResponse:
+      required:
+        - message
+        - status
+      type: object
+      properties:
+        message:
+          type: string
+          example: Internal server error
+          description: Error message
+        status:
+          type: integer
+          example: 500
+          description: HTTP status code

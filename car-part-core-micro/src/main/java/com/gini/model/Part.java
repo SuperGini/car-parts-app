@@ -18,7 +18,7 @@ public class Part {
     @Column(name = "part_number", unique = true, nullable = false)
     private String partNumber;
 
-    @Column(name = "price")
+    @Column(name = "name")
     private String name;
 
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
