@@ -67,3 +67,6 @@ liquibase:
 
 ### For more information about liquibase: https://www.baeldung.com/liquibase-refactor-schema-of-java-app
 
+
+# Generate the Api interfaceace using [car-parts-openapi.yaml](car-part-core-micro%2Fsrc%2Fmain%2Fresources%2Fcar-parts-openapi.yaml)
+

@@ -68,6 +68,19 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+<!-- OPEN API necessary dependencies -->
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+            <version>0.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>1.8.0</version>
+        </dependency>
+<!-- ///////////////////////////////////////////////////////////////// -->
     </dependencies>
 
     <build>
@@ -85,19 +98,54 @@
                 </configuration>
             </plugin>
 
-<!--            This plugin is used to generate the xml database from an existing database. And then run it https://www.baeldung.com/liquibase-refactor-schema-of-java-app -->
-<!--            <plugin>-->
-<!--                <groupId>org.liquibase</groupId>-->
-<!--                <artifactId>liquibase-maven-plugin</artifactId>-->
-<!--                <version>4.29.2</version>-->
-<!--                <configuration>-->
-<!--                    <driver>org.postgresql.Driver</driver>-->
-<!--                    <url>jdbc:postgresql://localhost:5432/warehouse</url>-->
-<!--                    <username>ginitoru</username>-->
-<!--                    <password>1234</password>-->
-<!--                    <outputChangeLogFile>src/main/resources/initiating_database_2024_10_27_001.xml</outputChangeLogFile>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
+<!--plugin for open api generator-->
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>7.8.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>
+                                ${project.basedir}/src/main/resources/car-parts-openapi.yaml
+                            </inputSpec>
+<!--  ///////////////////////////// is the default output directory, so we don't need to mention it-->
+                           <output>${project.build.directory}/generated-sources/openapi</output>
+                            <generatorName>spring</generatorName>
+                            <apiPackage>com.gini.api</apiPackage>
+                            <modelPackage>com.gini.dto</modelPackage>
+<!-- ///////////////////// does not create the ApiUtil class needed for the default methods in the api interface    -->
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <configOptions>
+<!--                                <delegatePattern>true</delegatePattern>-->
+<!--  /////////////////////////   to use jakarta and not javax-->
+                                <useSpringBoot3>true</useSpringBoot3>
+<!-- /////////////////////////     to generate only the api interface-->
+                                <interfaceOnly>true</interfaceOnly>
+<!-- ////////////////////////     does not create default method in api interfacea-->
+                                <skipDefaultInterface>true</skipDefaultInterface>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+<!--            This plugin is used to generate the xml database from an existing database. And then run it https://www.baeldung.com/liquibase-refactor-schema-of-java-app-->
+            <plugin>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-maven-plugin</artifactId>
+                <version>4.29.2</version>
+                <configuration>
+                    <driver>org.postgresql.Driver</driver>
+                    <url>jdbc:postgresql://localhost:5432/warehouse</url>
+                    <username>ginitoru</username>
+                    <password>1234</password>
+                    <outputChangeLogFile>src/main/resources/initiating_database_2024_10_27_001.xml</outputChangeLogFile>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

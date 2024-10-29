@@ -26,7 +26,7 @@ public class Car {
     @Column(name = "production_end_year")
     private LocalDate productionEndYear;
 
-    @OneToOne(mappedBy = "car", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private CarManufacturer carManufacturer;
 
     @OneToMany(mappedBy = "car", fetch = FetchType.LAZY)
@@ -51,5 +51,15 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(model, productionStartYear, productionEndYear);
+    }
+
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id='" + id + '\'' +
+                ", model='" + model + '\'' +
+                ", productionStartYear=" + productionStartYear +
+                ", productionEndYear=" + productionEndYear +
+                '}';
     }
 }
