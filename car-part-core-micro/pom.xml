@@ -46,11 +46,21 @@
         </dependency>
 
         <!-- JDBC logging -->
+        <!-- https://mvnrepository.com/artifact/com.github.gavlyukovskiy/p6spy-spring-boot-starter -->
         <dependency>
-            <groupId>p6spy</groupId>
-            <artifactId>p6spy</artifactId>
-            <version>3.9.1</version>
+            <groupId>com.github.gavlyukovskiy</groupId>
+            <artifactId>p6spy-spring-boot-starter</artifactId>
+            <version>1.9.2</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.github.gavlyukovskiy/datasource-proxy-spring-boot-starter -->
+<!--        <dependency>-->
+<!--            <groupId>com.github.gavlyukovskiy</groupId>-->
+<!--            <artifactId>datasource-proxy-spring-boot-starter</artifactId>-->
+<!--            <version>1.9.2</version>-->
+<!--        </dependency>-->
+
+
 
         <dependency>
             <groupId>org.liquibase</groupId>
@@ -134,18 +144,18 @@
             </plugin>
 
 <!--            This plugin is used to generate the xml database from an existing database. And then run it https://www.baeldung.com/liquibase-refactor-schema-of-java-app-->
-            <plugin>
-                <groupId>org.liquibase</groupId>
-                <artifactId>liquibase-maven-plugin</artifactId>
-                <version>4.29.2</version>
-                <configuration>
-                    <driver>org.postgresql.Driver</driver>
-                    <url>jdbc:postgresql://localhost:5432/warehouse</url>
-                    <username>ginitoru</username>
-                    <password>1234</password>
-                    <outputChangeLogFile>src/main/resources/initiating_database_2024_10_27_001.xml</outputChangeLogFile>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.liquibase</groupId>-->
+<!--                <artifactId>liquibase-maven-plugin</artifactId>-->
+<!--                <version>4.29.2</version>-->
+<!--                <configuration>-->
+<!--                    <driver>org.postgresql.Driver</driver>-->
+<!--                    <url>jdbc:postgresql://localhost:5432/warehouse</url>-->
+<!--                    <username>ginitoru</username>-->
+<!--                    <password>1234</password>-->
+<!--                    <outputChangeLogFile>src/main/resources/initiating_database_2024_10_27_001.xml</outputChangeLogFile>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

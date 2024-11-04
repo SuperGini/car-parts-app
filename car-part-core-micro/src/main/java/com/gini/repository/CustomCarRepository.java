@@ -2,14 +2,16 @@ package com.gini.repository;
 
 
 import com.gini.model.Car;
+import com.gini.model.CarManufacturer;
+import com.gini.model.Part;
+import com.gini.model.Price;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Tuple;
 import jakarta.persistence.TypedQuery;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.JoinType;
-import jakarta.persistence.criteria.Root;
+import jakarta.persistence.criteria.*;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class CustomCarRepository {
@@ -94,8 +96,8 @@ public class CustomCarRepository {
 
     }
 
+    //asta bubuie -> ca sa mearga trebuie sa facem cu multiselect, din cauza la leazy initialization exception
     public void getCarWithJoinManufacturer() {
-
 
         CriteriaBuilder builder = em.getCriteriaBuilder(); //create critaria builder
 
@@ -106,16 +108,89 @@ public class CustomCarRepository {
         carRoot.join("carManufacturer", JoinType.INNER); //SELECT c FROM Car c JOIN c.manufacturer ON manufacturer.id = car.manufacturer_id;
 
 
-        cq.select(carRoot);
+
+        cq.select(carRoot).where(builder.equal(carRoot.get("id"), "e13776d1-f139-48df-a37f-ef660850fe37"));
 
 
 
         TypedQuery<Car> query = em.createQuery(cq);
 
-        query.getResultList().forEach(System.out::println);
+        query.getResultList().forEach(car -> {
+            System.out.println(car);
+            System.out.println(car.getCarManufacturer()); //va genera lazy initialization exception
+        });
+
+    }
+
+
+
+    //JOINS-------------------
+
+    public void joinsPart2() {
+
+        var builder = em.getCriteriaBuilder();
+        CriteriaQuery<Tuple> cq = builder.createTupleQuery(); //Tuple e o colectie de genul map care ne ajuta sa incarcam mai multe colectii deodata -> Tuple<Car, Manufacturer, Price>
+
+        Root<Car> carRoot = cq.from(Car.class); //SELECT c FROM Car c
+        Join<Car, CarManufacturer> joinCarManufacturer = carRoot.join("carManufacturer", JoinType.LEFT); //default INNER JOIN
+        Join<Car, Part> joinParts = carRoot.join("parts", JoinType.LEFT);
+        Join<Part, Price> joinPrice = joinParts.join("price", JoinType.LEFT);
+
+
+
+
+
+//        em.getCriteriaBuilder()
+//                .createTupleQuery()
+//                .multiselect(carRoot, join);
+
+
+        cq.multiselect(carRoot, joinCarManufacturer,joinParts, joinPrice); //SELECT c, m FROM Car c INNER JOIN CarManufacturer m.......
+
+
+        var q = em.createQuery(cq);
+
+        q.getResultList()
+                .forEach(x -> {
+            System.out.println(x.get(0) + " " + x.get(1)+ " " + x.get(2) + " " + x.get(3));
+        });
+
+    }
+
+    public void subquery () {
+
+    var builder  = em.getCriteriaBuilder();
+    var mainQuery = builder.createQuery(Car.class);
+
+    Root<Car> carRoot = mainQuery.from(Car.class);
+
+
+    //SELECT c, (SELECT count(p) FROM Part p JOIN Car c ON p.id IN c.parts) n FROM Car c Where n > 1
+
+    Subquery<Long> subquery = mainQuery.subquery(Long.class);
+    Root<Car> subRootCar = subquery.correlate(carRoot);
+
+    Join<Car, Part> carPartJoin = subRootCar.join("parts", JoinType.LEFT);
+
+    subquery.select(builder.count(carPartJoin));
+
+    mainQuery.select(carRoot)
+            .where(builder.greaterThan(subquery, 1L));
+
+    var q = em.createQuery(mainQuery);
+
+    q.getResultList().forEach(System.out::println);
+
+
 
 
     }
+
+
+
+
+
+
 
 
 }

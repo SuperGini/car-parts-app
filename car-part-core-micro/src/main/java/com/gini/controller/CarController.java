@@ -38,7 +38,7 @@ public class CarController implements CarApi {
 
     @Override
     public ResponseEntity<CarResponse> findCarById(UUID id) {
-        customCarRepository.getCarWithJoinManufacturer();
+        customCarRepository.joinsPart2();
 
 
         return null;

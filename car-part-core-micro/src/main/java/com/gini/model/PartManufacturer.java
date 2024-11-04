@@ -22,7 +22,13 @@ public class PartManufacturer {
     private Set<Part> parts;
 
 
-
+    @Override
+    public String toString() {
+        return "PartManufacturer{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {

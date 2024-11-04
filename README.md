@@ -70,3 +70,10 @@ liquibase:
 
 # Generate the Api interfaceace using [car-parts-openapi.yaml](car-part-core-micro%2Fsrc%2Fmain%2Fresources%2Fcar-parts-openapi.yaml)
 
+ run the command:
+```yaml
+mvn clean install
+```
+to generate the API interface.
+
+

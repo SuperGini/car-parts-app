@@ -25,7 +25,10 @@ public class Price {
     private Part part;
 
 
-
-
-
+    @Override
+    public String toString() {
+        return "Price{" +
+                "partPrice=" + partPrice +
+                '}';
+    }
 }

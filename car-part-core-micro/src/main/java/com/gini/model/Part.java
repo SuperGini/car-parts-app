@@ -1,7 +1,9 @@
 package com.gini.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Objects;
@@ -34,8 +36,12 @@ public class Part {
     private short version;
 
 
-
-
+    @Override
+    public String toString() {
+        return "Part{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 
     @Override
     public boolean equals(Object o) {
