@@ -44,7 +44,9 @@ public class PartController implements PartApi {
     @GetMapping("/part/filter")
     public List<Part> finAllPartsWithFilter (@RequestBody PartFilter partFilter) {
 
-       return partService.getAllPartsFiltered(partFilter);
+        partService.criteriabuilder(partFilter);
+
+        return null;
 
     }
 }

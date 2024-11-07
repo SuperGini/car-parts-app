@@ -66,4 +66,41 @@ public class PartService {
 
         return x;
     }
+
+    @Transactional(readOnly = true)
+    public List<Part> getAllPartsFiltered2(PartFilter partFilter) {
+
+
+       var x = partRepository.findAll(partRepositoryWithFilter.findPartWithFilter2(partFilter));
+
+        x.forEach(c -> {
+            System.out.println(c.getPartManufacturer().getName());
+            System.out.println(c.getCar().getModel());
+            System.out.println(c.getName());
+            System.out.println(c.getCar().getCarManufacturer().getName());
+            System.out.println(c.getPrice().getPartPrice());
+
+
+        });
+
+       return null;
+
+
+    }
+
+    @Transactional(readOnly = true)
+    public void criteriabuilder(PartFilter partFilter) {
+        partRepositoryWithFilter.withCriteriaBuilder(partFilter);
+
+    }
+
+    @Transactional(readOnly = true)
+    public void criteriaBuidler2 (PartFilter partFilter) {
+
+        var x = partRepositoryWithFilter.findPartWithFilter2(partFilter);
+
+
+        partRepositoryWithFilter.criteria2WithSpecification(x);
+    }
+
 }
