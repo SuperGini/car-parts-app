@@ -5,11 +5,15 @@ import com.gini.dto.CarManufacturerRequest;
 import com.gini.dto.CarManufacturerResponse;
 import com.gini.dto.CarRequest;
 import com.gini.dto.CarResponse;
+import com.gini.dto.PartFilterRequest;
 import com.gini.repository.CustomCarRepository;
+import com.gini.repository.filters.CarFilter;
 import com.gini.service.CarService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
@@ -42,5 +46,18 @@ public class CarController implements CarApi {
 
 
         return null;
+    }
+
+
+    @GetMapping("/parts-all")
+    public void getAllParts() {
+
+        carService.getAllParts();
+
+    }
+
+    @GetMapping("/parts-all2")
+    public void getAllParts2(@RequestBody PartFilterRequest carFilter) {
+        carService.getAllPartsWithSpecificationPaginationAndSorting(carFilter);
     }
 }

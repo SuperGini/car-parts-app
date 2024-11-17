@@ -22,6 +22,7 @@ public class PartManufacturer {
     private Set<Part> parts;
 
 
+
     @Override
     public String toString() {
         return "PartManufacturer{" +

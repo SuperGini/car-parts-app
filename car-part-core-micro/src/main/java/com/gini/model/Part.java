@@ -1,11 +1,10 @@
 package com.gini.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -32,6 +31,9 @@ public class Part {
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private PartManufacturer partManufacturer;
 
+    @OneToMany(mappedBy = "part", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private List<AftermarketPart> aftermarketPart;
+
     @Version
     private short version;
 
@@ -39,7 +41,8 @@ public class Part {
     @Override
     public String toString() {
         return "Part{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 

@@ -41,14 +41,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/PartManufacturerResponse'
-# https://stackoverflow.com/questions/43314384/different-examples-for-same-model-in-swagger
+        # https://stackoverflow.com/questions/43314384/different-examples-for-same-model-in-swagger
         '400':
           description: Validation exception
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-# multiple error examples
+              # multiple error examples
               examples:
                 InvalidName:
                   value:
@@ -153,6 +153,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /part/paginated:
+    post:
+      tags:
+        - part
+      summary: Gets all the parts for a car model pagianted
+      description: Adds a new car manufacturer in the database
+      operationId: getPartsForCarPaginated
+      requestBody:
+        description: Get all parts paginated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartFilterRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarFilterResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidFilterFields:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                NotFound:
+                  value:
+                    message: Part or model not found
+                    status: 404
+                ModelNameRequired:
+                  value:
+                    message: Car name required
+                    status: 400
 
   /car:
     post:
@@ -390,6 +433,69 @@ components:
         price:
           type: number
           example: 145.20
+    PartFilterRequest:
+      required:
+        - carModel
+      properties:
+        carModel:
+          type: string
+          example: Spring
+        manufacturerName:
+          type: string
+          example: Dacia
+        partName:
+          type: string
+          example: rulment
+        partManufacturerName:
+          type: string
+          example: SKF
+        startPrice:
+          type: number
+          example: 20.25
+        endPrice:
+          type: number
+          example: 100.58
+    CarFilterResponse:
+      required:
+        - id
+        - model
+      properties:
+        id:
+          type: string
+          example: 8a14a5a9-3a98-4338-a7dd-b36ec8362e2d
+        model:
+          type: string
+          example: Spring
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartFilterResponse'
+    PartFilterResponse:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: string
+          example: 730754bd-1045-4d9d-9be6-38e4c6636bfb
+        name:
+          type: string
+          example: rulment
+        afParts:
+          type: array
+          items:
+            $ref: '#/components/schemas/AfPartFilterResponse'
+        price:
+          $ref: '#/components/schemas/PriceResponse'
+    AfPartFilterResponse:
+      properties:
+        id:
+          type: string
+          example: 954577b8-bf47-49b3-ac3c-9c0083b13550
+        afPartNumber:
+          type: string
+          example: rulment-af-01
+
     CarRequest:
       required:
         - model
@@ -438,6 +544,7 @@ components:
         carManufacturer:
           type: string
           example: Ford
+
     CarManufacturerRequest:
       required:
         - name

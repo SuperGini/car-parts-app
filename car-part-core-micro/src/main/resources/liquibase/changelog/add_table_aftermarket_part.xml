@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="2024-11-16-001" author="Ginitoru">
+        <createTable tableName="aftermarket_part">
+            <column name="id" type="VARCHAR(36)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="af_part_pkey"/>
+            </column>
+            <column name="af_part_number" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="part_id" type="VARCHAR(255)" >
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="Ginitoru " id="2024-11-16-002">
+        <addUniqueConstraint columnNames="price_id" constraintName="ukcnnmhrxntopsdny0tcpuf800y" tableName="part"/>
+    </changeSet>
+    <changeSet author="Ginitoru" id="2024-11-16-003">
+        <addForeignKeyConstraint baseColumnNames="part_id" baseTableName="aftermarket_part" constraintName="fk5w4xfwcxtbm517b9h5o37wr39" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="part" validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>
