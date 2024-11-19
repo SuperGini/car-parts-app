@@ -1,0 +1,10 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="Ginitoru " id="2024-11-19-001">
+        <addUniqueConstraint columnNames="price_id" constraintName="ukcnnmhrxntopsdny0tcpuf900x" tableName="aftermarket_part"/>
+    </changeSet>
+    <changeSet author="Ginitoru" id="2024-11-19-002">
+        <addForeignKeyConstraint baseColumnNames="price_id" baseTableName="aftermarket_part" constraintName="fk5w4xfwcxtbm517b9h5o37wr40" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="price" validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>

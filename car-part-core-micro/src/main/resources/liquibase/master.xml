@@ -3,6 +3,8 @@
 
     <include file="classpath:/liquibase/changelog/initiating_database_2024_10_27_001.xml" relativeToChangelogFile="false" />
     <include file="classpath:/liquibase/changelog/add_table_aftermarket_part.xml" relativeToChangelogFile="false" />
+    <include file="classpath:/liquibase/changelog/join_af_table_with_price_table_2027_11_19.sql" relativeToChangelogFile="false" />
+    <include file="classpath:/liquibase/changelog/join_af_table_with_price_table_add_constrains_2027_11_19.sql" relativeToChangelogFile="false" />
 
 <!--    <include file="classpath:/liquibase/changelog/modify_column_name_and_add_constraint_2024_10_27_002.xml" relativeToChangelogFile="false" />-->
 
