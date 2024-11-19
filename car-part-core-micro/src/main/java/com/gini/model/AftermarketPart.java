@@ -18,8 +18,13 @@ public class AftermarketPart {
     private String afPartNumber;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Part part;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private Price price;
+
+
 
     @Override
     public boolean equals(Object o) {

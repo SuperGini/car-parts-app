@@ -20,6 +20,8 @@ tags:
     description: Endpoints for cars and cars manufacturers
   - name: part
     description: Endpoints for parts and parts manufacturers
+  - name: af-part
+    description: Aftermarket parts
 paths:
   /part/part-manufacturer:
     post:
@@ -196,6 +198,45 @@ paths:
                   value:
                     message: Car name required
                     status: 400
+
+  /af-part:
+    post:
+      tags:
+        - af-part
+      summary: Adds a af-part
+      description: Adds a new af-part in the database
+      operationId: createAfPart
+      requestBody:
+        description: Adds a new af-part
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AfPartRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AfPartResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidPartFields:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                PartNotFound:
+                  value:
+                    message: Part does not exists
+                    status: 404
+
 
   /car:
     post:
@@ -495,7 +536,32 @@ components:
         afPartNumber:
           type: string
           example: rulment-af-01
-
+    AfPartRequest:
+      required:
+        - partId
+        - afPartNumber
+        - price
+      properties:
+        partId:
+          type: string
+          example: c72a2804-63d6-411c-b510-a9824335ba8c
+          description: The part id that this af-part coresponds
+        afPartNumber:
+          type: string
+          example: rulment-af-1
+          description: part number of af-part
+        price:
+          $ref: '#/components/schemas/PriceRequest'
+    AfPartResponse:
+      properties:
+        id:
+          type: string
+          example: 16b8c6f4-d5a4-4b37-8a37-f1f82e800157
+        afPartNumber:
+          type: string
+          example: rulment-af-1
+        price:
+          $ref: '#/components/schemas/PriceResponse'
     CarRequest:
       required:
         - model

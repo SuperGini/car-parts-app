@@ -1,6 +1,9 @@
 package com.gini.service;
 
 import com.gini.controller.AfRequest;
+import com.gini.dto.AfPartRequest;
+import com.gini.dto.AfPartResponse;
+import com.gini.mapper.AfPartMapper;
 import com.gini.model.AftermarketPart;
 import com.gini.repository.AfPartRepository;
 import com.gini.repository.CustomAfPartRepository;
@@ -22,20 +25,19 @@ public class AfPartService {
 
 
     @Transactional
-    public void saveAfPart(AfRequest afRequest) {
+    public AfPartResponse saveAfPart(AfPartRequest afRequest) {
 
-        var part = partRepository.getReferenceById(afRequest.partId());
-        var af = new AftermarketPart();
-        af.setAfPartNumber(afRequest.afName());
+        var part = partRepository.getReferenceById(afRequest.getPartId());
+        var af = AfPartMapper.mapFrom(afRequest);
+        af.setPart(part);
 
         part.setAftermarketPart(List.of(af));
 
         af.setPart(part);
 
-        afPartRepository.save(af);
+       var afPart =  afPartRepository.save(af);
 
-        System.out.println(af.getId() + "----------------------");
-
+       return AfPartMapper.mapFrom(afPart);
     }
 
     @Transactional
