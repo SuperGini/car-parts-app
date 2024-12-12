@@ -122,3 +122,10 @@ Dependencies need it for Blaze persistence are:
     <scope>runtime</scope>
 </dependency>
 ````
+
+#ANGULAR
+in order to use angular material you need to add it to the Angular app:
+Go to the Angular parent directory (where angular.json is) and run the command:
+````
+ng add @angular/material
+````

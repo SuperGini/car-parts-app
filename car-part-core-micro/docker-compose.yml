@@ -13,5 +13,18 @@ services:
       - postgres-volume:/var/lib/postgresql/data
     ports:
       - '5432:5432'
+  keycloak:
+    image: quay.io/keycloak/keycloak:18.0
+    container_name: "keycloak"
+    ports:
+      - '8080:8080'
+    environment:
+      - KC_HOSTNAME=localhost
+      - ROOT_LOGLEVEL=DEBUG
+      - KEYCLOAK_LOGLEVEL=DEBUG
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    entrypoint: /opt/keycloak/bin/kc.sh start-dev
+
 volumes:
   postgres-volume:

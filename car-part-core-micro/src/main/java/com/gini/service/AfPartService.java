@@ -1,10 +1,8 @@
 package com.gini.service;
 
-import com.gini.controller.AfRequest;
 import com.gini.dto.AfPartRequest;
 import com.gini.dto.AfPartResponse;
 import com.gini.mapper.AfPartMapper;
-import com.gini.model.AftermarketPart;
 import com.gini.repository.AfPartRepository;
 import com.gini.repository.CustomAfPartRepository;
 import com.gini.repository.PartRepository;
@@ -35,9 +33,9 @@ public class AfPartService {
 
         af.setPart(part);
 
-       var afPart =  afPartRepository.save(af);
+        var afPart = afPartRepository.save(af);
 
-       return AfPartMapper.mapFrom(afPart);
+        return AfPartMapper.mapFrom(afPart);
     }
 
     @Transactional
@@ -47,7 +45,7 @@ public class AfPartService {
 
     }
 
-    public void getAllPartsForCarWithEntityGRaph(CarFilter carFilter){
+    public void getAllPartsForCarWithEntityGRaph(CarFilter carFilter) {
         afPartCustomRepository.getAllPartsForCarWithEntityGRaph(carFilter);
     }
 
