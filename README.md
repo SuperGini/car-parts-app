@@ -134,3 +134,19 @@ https://github.com/FortAwesome/angular-fontawesome
 https://github.com/FortAwesome/angular-fontawesome/blob/main/docs/usage/icon-library.md#using-the-icon-library
 
 fixing imports of _ scss files in components scss files: https://stackoverflow.com/questions/70058183/cant-use-sass-variables-in-angular-from-global-file-despite-other-styles-worki
+
+when building the angular project set the outputPath from angular.json file to:
+````
+"outputPath": "../src/main/resources/static"
+````
+angular will generate the build files in the static folder but in a subfolder called ---> browser.
+
+
+to tell Spring where to look for the index.html file in the application.properties add this code:
+
+````yaml
+spring:
+  thymeleaf:
+    prefix: classpath:/static/browser
+    
+````

@@ -24,7 +24,7 @@ import java.util.UUID;
 public class CarController implements CarApi {
 
     private final CarService carService;
-    private final CustomCarRepository customCarRepository;
+    private final CustomCarRepository customCarRepository; //todo: move this shit repositry to service
 
     @Override
     public ResponseEntity<CarResponse> createCar(CarRequest carRequest) {

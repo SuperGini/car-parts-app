@@ -1,1 +1,28 @@
-<p>cars!!!!!!</p>
+<div class="cars-container">
+  <div class="white-space-1"></div>
+  <div class="manufacturer-container">
+    <form class="add-manufacturer">
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>manufacturer</mat-label>
+        <input matInput [(ngModel)]="carManufacturer" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <button class="btn" mat-stroked-button (click)="createCarManufacturer()">Add car manufacturer</button>
+    </form>
+    <form class="add-car">
+      <div class="car-section">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>car</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Select</mat-label>
+          <mat-select>
+            <mat-option value="one">First option</mat-option>
+            <mat-option value="two">Second option</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <button class="btn" mat-stroked-button>Add car</button>
+    </form>
+  </div>
+</div>

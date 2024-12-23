@@ -1,5 +1,8 @@
 server:
   port: 9090
+  servlet:
+    session:
+      timeout: 60s
 
 spring:
   application:
@@ -74,4 +77,15 @@ spring:
             user-info-uri: http://localhost:8080/realms/GINI/protocol/openid-connect/userinfo
             jwk-set-uri: http://localhost:8080/realms/GINI/protocol/openid-connect/certs
 
+
+#  thymeleaf:
+#    prefix: classpath:/static/browser
+  web:
+    resources:
+      static-locations: classpath:/static/browser
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
 
