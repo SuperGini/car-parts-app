@@ -1,4 +1,5 @@
 @use './variables' as *;
+@use '@angular/material' as mat;
 
 
 @mixin leftContainerPadding {
@@ -10,5 +11,16 @@
     font-size: 1.3rem;
     border-radius: 0.5rem;
     border: 1px solid $blue-dark-color;
+  }
+}
+
+@mixin angularFormFieldCustomization {
+  .form-field {
+    @include mat.form-field-overrides((
+      outlined-label-text-size:1.6rem,
+      container-text-size: 1.6rem,
+      outlined-label-text-color: $white-gray,
+      outlined-hover-label-text-color: $white-gray
+    ));
   }
 }

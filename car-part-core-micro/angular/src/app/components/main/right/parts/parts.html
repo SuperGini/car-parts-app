@@ -1,1 +1,110 @@
-<p>parts!!!!!!</p>
+<div class="cars-container">
+  <div class="white-space-1"></div>
+  <div class="manufacturer-container">
+    <div class="wrapper-container">
+<!--      ADD Manufacturer-->
+      <form class="add-manufacturer">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>manufacturer</mat-label>
+          <input matInput>
+        </mat-form-field>
+        <button class="btn" mat-stroked-button>Add part manufacturer</button>
+      </form>
+<!--      ----------------------------------------------------------    -->
+<!--      ADD Car ------------------------------------------------------------->
+      <form class="add-car">
+        <div class="car-section">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>part name</mat-label>
+            <input matInput>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>part number</mat-label>
+            <input matInput>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>price</mat-label>
+            <input matInput>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Currency</mat-label>
+            <mat-select>
+              <mat-option value="one">Ron</mat-option>
+              <mat-option value="two">Euro</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Cars</mat-label>
+            <mat-select>
+              <mat-option value="one">First option</mat-option>
+              <mat-option value="two">Second option</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Manufacturers</mat-label>
+            <mat-select>
+              <mat-option value="one">First option</mat-option>
+              <mat-option value="two">Second option</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <button class="btn" mat-stroked-button>Add part</button>
+      </form>
+    </div>
+
+
+    <form class ="af-form">
+<!--      search--------------------->
+      <mat-form-field appearance="outline" class="form-field">
+        <fa-icon icon="magnifying-glass" class="icon fa-xl"></fa-icon>
+        <input matInput>
+      </mat-form-field>
+<!---->
+<!--      PART info-->
+      <div class="info-part-container">
+        <div class="info-part">
+          <p>part name:</p>
+          <p> bujie</p>
+        </div>
+        <div class="info-part">
+          <p>part number:</p>
+          <p> 1122-89-pt-r5</p>
+        </div>
+        <div class="info-part">
+          <p>manufacturer:</p>
+          <p> skf</p>
+        </div>
+        <div class="info-part">
+          <p>price:</p>
+          <p> 25 Ron</p>
+        </div>
+        <div class="info-part">
+          <p>model:</p>
+          <p> Ford</p>
+        </div>
+      </div>
+<!--      ------------------------------------------>
+<!--    ADD Af Part----------------------------------------------------------->
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label> af part number</mat-label>
+        <input matInput>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Currency</mat-label>
+        <mat-select>
+          <mat-option value="one">Ron</mat-option>
+          <mat-option value="two">Euro</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button class="btn" mat-stroked-button>Add af part</button>
+    </form>
+<!--    ---------------------------------------------------------------------------->
+  </div>
+</div>

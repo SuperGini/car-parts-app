@@ -2,6 +2,9 @@
 @use "../../../../../partials/variables" as *;
 @use "../../../../../partials/mixins" as *;
 
+@include angularMatButtonCustomization;
+@include angularFormFieldCustomization;
+
 .cars-container {
   height: 100%;
   display: flex;
@@ -15,34 +18,17 @@
 
   .manufacturer-container {
     width: 40rem;
-
     .add-manufacturer {
       padding-top: 3rem;
       display: flex;
       flex-direction: column;
 
-      .form-field {
-        @include mat.form-field-overrides((
-          outlined-label-text-size:1.3rem,
-          container-text-size: 1.3rem
-        ));
-      }
-      @include angularMatButtonCustomization;
     }
 
     .add-car {
       padding-top: 5rem;
       display: flex;
       flex-direction: column;
-
-      .form-field {
-        @include mat.form-field-overrides((
-          outlined-label-text-size:1.3rem,
-          container-text-size: 1.3rem
-        ));
-      }
-
-      @include angularMatButtonCustomization;
     }
   }
 }
