@@ -4,9 +4,8 @@
 
 .left-container {
   height: 100vh;
-  border-right: 1px solid black;
+  border-right: 1px solid $blue-dark-color;
   font-size: 1.5rem;
-
 
 }
 
@@ -16,7 +15,7 @@
   justify-content: space-between;
   align-items: center;
   font-size: 1.2rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid $blue-dark-color;
 
   .username {
     padding-right: 1rem;
@@ -38,7 +37,7 @@
 .tooltip-override {
 
   @include mat.tooltip-overrides((
-    container-color: $blue-dark-color,
+    container-color: red,
     supporting-text-color: $gray-white-color,
     supporting-text-size: 1rem
   ));

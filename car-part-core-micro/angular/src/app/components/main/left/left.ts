@@ -29,7 +29,7 @@ export class Left {
   }
 
   routeToSearchPartsPage(){
-
+    this.router.navigate(['main/search-parts']);
   }
 
   routeToSearchCarsPage(){
