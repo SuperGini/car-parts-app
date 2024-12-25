@@ -1,0 +1,104 @@
+@use "../../../../../partials/variables" as *;
+@use "../../../../../partials/mixins" as *;
+@use '@angular/material' as mat;
+
+
+@include whiteSpace;
+@include angularFormFieldCustomization;
+
+
+.search-parts-container {
+  display: flex;
+  padding-top: 3rem;
+  height: 100%;
+}
+
+.white-space-1 {
+  max-width: 7rem;
+  min-width: 3rem;
+  width: 100%;
+  height: 100%;
+}
+
+.filters-container {
+  margin-right: 2rem;
+}
+
+.price-container {
+
+  p {
+    font-size: 1.5rem;
+  }
+
+  mat-slider {
+    max-width: 92%;
+    width: 100%;
+  }
+
+  .price-filter-fields {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.mini-input-field {
+  @include mat.form-field-overrides((
+    container-height: 1rem,
+    container-vertical-padding: 0, // padding up and down disappear and then i can set the height
+  ));
+  height: 5rem;
+  max-width: 7rem;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
+mat-label {
+  margin-top: 1rem;
+}
+
+
+.table-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  padding-right: 5rem;
+
+  .search-part {
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}
+
+mat-paginator {
+  margin-bottom: 8rem;
+}
+
+
+.search-part-field {
+  position: relative;
+
+  @include mat.form-field-overrides((
+    //outlined-label-text-size:1.6rem,
+    container-text-size: 1.5rem,
+    outlined-label-text-color: $white-gray,
+    container-vertical-padding: 2rem,
+    container-height: 1rem,
+    filled-active-indicator-height: 0,
+    filled-focus-active-indicator-height: 0,
+    outlined-label-text-weight: 0,
+    subscript-text-line-height: 0
+  ));
+
+  input {
+    color: $blue-dark-color;
+    padding-left: 4rem;
+  }
+
+  fa-icon {
+    position: absolute;
+  }
+}
+

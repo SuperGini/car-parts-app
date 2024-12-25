@@ -25,3 +25,12 @@
     ));
   }
 }
+
+@mixin whiteSpace {
+  .white-space-1 {
+    max-width: 7rem;
+    min-width: 3rem;
+    width: 100%;
+    height: 100%;
+  }
+}

@@ -5,17 +5,11 @@
 
 @include angularMatButtonCustomization;
 @include angularFormFieldCustomization;
+@include whiteSpace;
 
 .cars-container {
   height: 100%;
   display: flex;
-
-  .white-space-1 {
-    max-width: 7rem;
-    min-width: 3rem;
-    width: 100%;
-    height: 100%;
-  }
 
   .manufacturer-container {
     display: flex;
