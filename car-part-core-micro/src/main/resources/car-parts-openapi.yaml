@@ -14,7 +14,17 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://localhost:8080
+  - url: http://{host}:{port}
+    variables:
+      host:
+        description: local
+        default: localhost
+      port:
+        enum:
+          - '8080'
+          - '9090'
+        default: '8080'
+
 tags:
   - name: car
     description: Endpoints for cars and cars manufacturers

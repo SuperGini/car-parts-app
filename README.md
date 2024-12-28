@@ -150,3 +150,24 @@ spring:
     prefix: classpath:/static/browser
     
 ````
+
+## How to generate interfaces in Angular using .yaml files and openapi generator:
+````
+https://www.kevinboosten.dev/how-i-use-an-openapi-spec-in-my-angular-projects
+https://openapi-generator.tech/docs/usage -> how to use cli
+https://stackoverflow.com/questions/62473470/how-do-i-override-the-servers-url-basepath-when-generating-client-using-ope
+https://swagger.io/docs/specification/v3_0/api-host-and-base-path/
+````
+
+## How to setup Angular environments:
+```
+https://angular.dev/tools/cli/environments
+```
+Generate environments:
+```
+ng generate environments
+```
+After creating the local environment run the comand to buit with the local values:
+```
+ng build --configuration local
+```

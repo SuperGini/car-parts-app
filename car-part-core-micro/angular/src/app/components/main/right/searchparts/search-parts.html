@@ -35,7 +35,7 @@
           <input matInput placeholder="search parts">
         </mat-form-field>
       </div>
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class=" example-list mat-elevation-z8" cdkDropList (cdkDropListDropped)="drop($event)">
 
         <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
@@ -65,11 +65,16 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag class="example-box"></tr>
       </table>
 
     </div>
 
+<!--    <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">-->
+<!--      @for (movie of movies; track movie) {-->
+<!--        <div class="example-box" cdkDrag>{{movie}}</div>-->
+<!--      }-->
+<!--    </div>-->
 
 
     <mat-paginator [length]="100"

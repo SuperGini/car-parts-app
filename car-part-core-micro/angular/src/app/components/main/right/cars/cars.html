@@ -2,9 +2,14 @@
   <div class="white-space-1"></div>
   <div class="manufacturer-container">
     <form class="add-manufacturer">
+      <div class="response-container">
+        @if (successResponse()) {
+          <p class="success-response">{{successResponse()}}</p>
+        }
+      </div>
       <mat-form-field appearance="outline" class="form-field">
         <mat-label>manufacturer</mat-label>
-        <input matInput [(ngModel)]="carManufacturer" [ngModelOptions]="{standalone: true}">
+        <input matInput [formControl]="carManufacturer">
       </mat-form-field>
       <button class="btn" mat-stroked-button (click)="createCarManufacturer()">Add car manufacturer</button>
     </form>
