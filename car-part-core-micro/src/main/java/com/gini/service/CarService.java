@@ -19,11 +19,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -195,7 +197,15 @@ public class CarService {
         return null;
     }
 
-
     // testsing --------------------------------------------------------END-------------------------------------------
+
+    @Transactional(readOnly = true)
+    public List<CarManufacturerResponse> getAllManufacturers() {
+        return carManufacturerRepository.findAll()
+                .stream()
+                .map(carMapper::toCarManufacturerResponse)
+                .toList();
+    }
+
 
 }

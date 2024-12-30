@@ -29,7 +29,7 @@ public class SecurityConfig {
         requestCache.setMatchingRequestParameterName(null);
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
 //                https://stackoverflow.com/questions/75222930/spring-boot-3-0-2-adds-continue-query-parameter-to-request-url-after-login
                 .requestCache(cache -> cache.requestCache(requestCache))

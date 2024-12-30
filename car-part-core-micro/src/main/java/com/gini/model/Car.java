@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@Entity(name = "car")
+@Entity
 public class Car {
 
     @Id

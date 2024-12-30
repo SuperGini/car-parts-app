@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {Gateway} from './gateway/gateway';
-import {CarManufacturerRequest} from '../core/api/v1';
+import {CarManufacturerRequest, CarRequest} from '../core/api/v1';
 
 @Injectable({providedIn: 'root'})
 export class CarManufacturerService {
@@ -9,6 +9,14 @@ export class CarManufacturerService {
 
   createCarManufacturer (carManufacturer: CarManufacturerRequest) {
     return this.gateway.createManufacturer(carManufacturer);
+  }
+
+  getAllCarrManufacturers () {
+    return this.gateway.getAllCarrManufacturers();
+  }
+
+  createCare(careRequest: CarRequest) {
+    return this.gateway.createCar(careRequest)
   }
 
 

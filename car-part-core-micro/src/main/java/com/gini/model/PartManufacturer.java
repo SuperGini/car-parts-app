@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-@Entity(name = "part_manufacturer")
+@Entity
 public class PartManufacturer {
 
     @Id

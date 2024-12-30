@@ -14,7 +14,7 @@ import java.util.Objects;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "car_manufacturer")
+@Entity
 public class CarManufacturer {
 
     @Id
