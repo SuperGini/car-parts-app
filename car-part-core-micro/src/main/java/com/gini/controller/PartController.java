@@ -47,6 +47,11 @@ public class PartController implements PartApi {
     }
 
     @Override
+    public ResponseEntity<List<PartManufacturerResponse>> getAllPartManufacturers() {
+        return ResponseEntity.ok(partService.getAllPartManufacturers());
+    }
+
+    @Override
     public ResponseEntity<List<CarFilterResponse>> getPartsForCarPaginated(PartFilterRequest partFilterRequest) {
         log.info("entering paginated controller");
         var x =carService.getAllPartsWithSpecificationPaginationAndSorting2(partFilterRequest);

@@ -7,13 +7,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { Currency } from './currency';
 
 
-export interface PriceRequest { 
-    currency: Currency;
-    price: number;
+export interface CarResponse2 { 
+    id: string;
+    model: string;
 }
-
-
 

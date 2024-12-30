@@ -208,6 +208,43 @@ paths:
                   value:
                     message: Car name required
                     status: 400
+  /part/manufacturers:
+    get:
+      tags:
+        - part
+      summary: Gets all the part manufacturers
+      description: retrieve all part manufacturers from the database
+      operationId: getAllPartManufacturers
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartManufacturerResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidFilterFields:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                NotFound:
+                  value:
+                    message: Part or model not found
+                    status: 404
+                ModelNameRequired:
+                  value:
+                    message: Car name required
+                    status: 400
+
 
   /af-part:
     post:
@@ -246,7 +283,6 @@ paths:
                   value:
                     message: Part does not exists
                     status: 404
-
 
   /car:
     post:
@@ -398,6 +434,56 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CarManufacturersResponse'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidCarFields:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                CarAlreadyExists:
+                  value:
+                    message: Car already exists
+                    status: 400
+        '404':
+          description: Not found exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                PartNotfound:
+                  value:
+                    message: Car not found
+                    status: 404
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /car/cars:
+    get:
+      tags:
+        - car
+      summary: Retrieves a list of cars
+      description: Retrieves a list of cars from the database
+      operationId: getAllCars
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CarResponse2'
         '400':
           description: Validation exception
           content:
@@ -669,7 +755,17 @@ components:
         carManufacturer:
           type: string
           example: Ford
-
+    CarResponse2:
+      required:
+        - id
+        - model
+      properties:
+        id:
+          type: string
+          format: uuid
+        model:
+          type: string
+          example: Focus
     CarManufacturerRequest:
       required:
         - name

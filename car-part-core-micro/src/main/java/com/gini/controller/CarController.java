@@ -5,6 +5,7 @@ import com.gini.dto.CarManufacturerRequest;
 import com.gini.dto.CarManufacturerResponse;
 import com.gini.dto.CarRequest;
 import com.gini.dto.CarResponse;
+import com.gini.dto.CarResponse2;
 import com.gini.dto.PartFilterRequest;
 import com.gini.repository.CustomCarRepository;
 import com.gini.service.CarService;
@@ -43,9 +44,12 @@ public class CarController implements CarApi {
     @Override
     public ResponseEntity<CarResponse> findCarById(UUID id) {
         customCarRepository.joinsPart2();
-
-
         return null;
+    }
+
+    @Override
+    public ResponseEntity<List<CarResponse2>> getAllCars() {
+        return ResponseEntity.ok(carService.getAllCars());
     }
 
     @Override

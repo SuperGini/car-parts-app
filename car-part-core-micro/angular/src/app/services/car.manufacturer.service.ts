@@ -19,6 +19,10 @@ export class CarManufacturerService {
     return this.gateway.createCar(careRequest)
   }
 
+  getAllCars() {
+    return this.gateway.getAllCars();
+  }
+
 
 
 }

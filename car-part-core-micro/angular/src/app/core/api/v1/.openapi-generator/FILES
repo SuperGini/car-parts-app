@@ -17,6 +17,7 @@ model/carManufacturerRequest.ts
 model/carManufacturerResponse.ts
 model/carRequest.ts
 model/carResponse.ts
+model/carResponse2.ts
 model/currency.ts
 model/errorResponse.ts
 model/models.ts

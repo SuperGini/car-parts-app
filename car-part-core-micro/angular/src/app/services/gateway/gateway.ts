@@ -2,12 +2,20 @@ import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {environment} from '../../../environments/environment';
-import {CarManufacturerRequest, CarManufacturerResponse, CarRequest, CarResponse} from '../../core/api/v1';
+import {
+  CarManufacturerRequest,
+  CarManufacturerResponse,
+  CarRequest,
+  CarResponse, CarResponse2,
+  PartManufacturerRequest, PartManufacturerResponse
+} from '../../core/api/v1';
 
 @Injectable({providedIn: 'root'})
 export class Gateway {
 
   httpClient = inject(HttpClient);
+
+  //car--------------------------------------------
 
   createManufacturer (carManufacturer: CarManufacturerRequest) {
     return this.httpClient.post<CarManufacturerResponse>(`${environment.apiUrl}/car/car-manufacturer`, carManufacturer);
@@ -21,5 +29,18 @@ export class Gateway {
     return this.httpClient.post<CarResponse>(`${environment.apiUrl}/car`, carRequest);
   }
 
+  getAllCars() {
+    return this.httpClient.get<CarResponse2[]>(`${environment.apiUrl}/car/cars`);
+  }
+
+  //part----------------------------------------------
+
+  createPartManufacturer(partManufacturerRequest: PartManufacturerRequest) {
+    return this.httpClient.post<PartManufacturerResponse>(`${environment.apiUrl}/part/part-manufacturer`, partManufacturerRequest);
+  }
+
+  getAllPartManufacturers() {
+    return this.httpClient.get<PartManufacturerResponse[]>(`${environment.apiUrl}/part/manufacturers`);
+  }
 
 }

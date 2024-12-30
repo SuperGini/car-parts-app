@@ -60,9 +60,7 @@ export class Cars implements OnInit {
         switchMap(carManufactureResponse => {
 
           successResponse.set(`car manufacturer ${carManufactureResponse.name} was created successfully`);
-          setTimeout(() => {
-            successResponse.set(``)
-          }, 5000);
+          this.deleteSuccessResponse();
           return this.carManufacturerService.getAllCarrManufacturers()
         })
       )
@@ -72,10 +70,10 @@ export class Cars implements OnInit {
   addCar() {
 
     const startYear = new Date();
-    startYear.setFullYear(2010 - Math.random() * 100, 12, 20);
+    startYear.setFullYear(2010 - Math.random() * 100, 12, 20); //because I was to lazy to send it from UI
 
     const endYear = new Date();
-    endYear.setFullYear(2010 + Math.random() * 100, 12, 20);
+    endYear.setFullYear(2010 + Math.random() * 100, 12, 20); //because I was to lazy to send it from UI
 
 
     const carRequest : CarRequest = {
@@ -89,6 +87,10 @@ export class Cars implements OnInit {
       .subscribe(carResponse => {
         console.log(JSON.stringify(carResponse));
       })
+  }
+
+  private deleteSuccessResponse() {
+    setTimeout(() => successResponse.set(``), 5000);
   }
 
 

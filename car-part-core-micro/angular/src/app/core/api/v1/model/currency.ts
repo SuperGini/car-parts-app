@@ -12,11 +12,9 @@
 /**
  * Allowed currency
  */
-export type Currency = 'RON' | 'EUR' | 'USD';
-
-export const Currency = {
-    Ron: 'RON' as Currency,
-    Eur: 'EUR' as Currency,
-    Usd: 'USD' as Currency
-};
+export enum Currency {
+    Ron = 'RON',
+    Eur = 'EUR',
+    Usd = 'USD'
+}
 

@@ -1,5 +1,5 @@
 import {signal} from '@angular/core';
-import {Observable, of, Subject} from 'rxjs';
+import {Subject} from 'rxjs';
 import {CarManufacturerResponse} from '../../core/api/v1';
 
 export const successResponse = signal<string>('');

@@ -2,16 +2,21 @@
   <div class="white-space-1"></div>
   <div class="manufacturer-container">
     <div class="wrapper-container">
-<!--      ADD Manufacturer-->
+      <!--      ADD Manufacturer---------------------------------->
       <form class="add-manufacturer">
+        <div class="response-container">
+          @if (successResponse()) {
+            <p class="success-response">{{ successResponse() }}</p>
+          }
+        </div>
         <mat-form-field appearance="outline" class="form-field">
           <mat-label>manufacturer</mat-label>
-          <input matInput>
+          <input matInput [formControl]="partManufacturerName">
         </mat-form-field>
-        <button class="btn" mat-stroked-button>Add part manufacturer</button>
+        <button class="btn" mat-stroked-button (click)="createPartManufacturer()">Add part manufacturer</button>
       </form>
-<!--      ----------------------------------------------------------    -->
-<!--      ADD Car ------------------------------------------------------------->
+      <!--      ----------------------------------------------------------    -->
+      <!--      ADD Car ------------------------------------------------------------->
       <form class="add-car">
         <div class="car-section">
           <mat-form-field appearance="outline" class="form-field">
@@ -31,25 +36,28 @@
 
           <mat-form-field>
             <mat-label>Currency</mat-label>
-            <mat-select>
-              <mat-option value="one">Ron</mat-option>
-              <mat-option value="two">Euro</mat-option>
-            </mat-select>
+              <mat-select>
+                @for (currency of currencies; track currency){
+                  <mat-option [value]="currency">{{currency}}</mat-option>
+                }
+              </mat-select>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Cars</mat-label>
             <mat-select>
-              <mat-option value="one">First option</mat-option>
-              <mat-option value="two">Second option</mat-option>
+              @for (carModel of carModels; track carModel.id) {
+                <mat-option [value]="carModel">{{carModel.model}}</mat-option>
+              }
             </mat-select>
           </mat-form-field>
 
           <mat-form-field>
-            <mat-label>Manufacturers</mat-label>
+            <mat-label>Part manufacturers</mat-label>
             <mat-select>
-              <mat-option value="one">First option</mat-option>
-              <mat-option value="two">Second option</mat-option>
+              @for (partManufacturer of partManufacturers; track partManufacturer.id) {
+                <mat-option [value]="partManufacturer">{{partManufacturer.name}}</mat-option>
+              }
             </mat-select>
           </mat-form-field>
         </div>
@@ -58,14 +66,14 @@
     </div>
 
 
-    <form class ="af-form">
-<!--      search--------------------->
+    <form class="af-form">
+      <!--      search--------------------->
       <mat-form-field appearance="outline" class="form-field">
         <fa-icon icon="magnifying-glass" class="icon fa-xl"></fa-icon>
         <input matInput>
       </mat-form-field>
-<!---->
-<!--      PART info-->
+      <!---->
+      <!--      PART info-->
       <div class="info-part-container">
         <div class="info-part">
           <p>part name:</p>
@@ -88,8 +96,8 @@
           <p> Ford</p>
         </div>
       </div>
-<!--      ------------------------------------------>
-<!--    ADD Af Part----------------------------------------------------------->
+      <!--      ------------------------------------------>
+      <!--    ADD Af Part----------------------------------------------------------->
       <mat-form-field appearance="outline" class="form-field">
         <mat-label> af part number</mat-label>
         <input matInput>
@@ -98,13 +106,14 @@
       <mat-form-field>
         <mat-label>Currency</mat-label>
         <mat-select>
-          <mat-option value="one">Ron</mat-option>
-          <mat-option value="two">Euro</mat-option>
+          @for (currency of currencies; track currency){
+            <mat-option [value]="currency">{{currency}}</mat-option>
+          }
         </mat-select>
       </mat-form-field>
 
       <button class="btn" mat-stroked-button>Add af part</button>
     </form>
-<!--    ---------------------------------------------------------------------------->
+    <!--    ---------------------------------------------------------------------------->
   </div>
 </div>

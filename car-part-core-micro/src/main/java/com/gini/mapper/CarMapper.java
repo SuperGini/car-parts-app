@@ -4,8 +4,10 @@ import com.gini.dto.CarManufacturerRequest;
 import com.gini.dto.CarManufacturerResponse;
 import com.gini.dto.CarRequest;
 import com.gini.dto.CarResponse;
+import com.gini.dto.CarResponse2;
 import com.gini.model.Car;
 import com.gini.model.CarManufacturer;
+import com.gini.repository.projection.CarProjection;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -47,6 +49,14 @@ public class CarMapper {
                 .model(car.getModel())
                 .productionStartYear(car.getProductionStartYear())
                 .productionEndYear(car.getProductionEndYear());
+    }
+
+
+    public CarResponse2 toCarResponse2 (CarProjection projection) {
+        return new CarResponse2()
+                .id(UUID.fromString(projection.id()))
+//                .id(projection.id())
+                .model(projection.model());
     }
 
 

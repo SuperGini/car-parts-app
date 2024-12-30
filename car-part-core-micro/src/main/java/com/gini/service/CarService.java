@@ -5,6 +5,7 @@ import com.gini.dto.CarManufacturerRequest;
 import com.gini.dto.CarManufacturerResponse;
 import com.gini.dto.CarRequest;
 import com.gini.dto.CarResponse;
+import com.gini.dto.CarResponse2;
 import com.gini.dto.PartFilterRequest;
 import com.gini.mapper.CarMapper;
 import com.gini.mapper.PaginationFilterMapper;
@@ -19,13 +20,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -81,14 +80,6 @@ public class CarService {
 
         return response;
     }
-
-
-
-
-
-
-
-
 
 
     // testsing --------------------------------------------------------START-------------------------------------------
@@ -207,5 +198,12 @@ public class CarService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<CarResponse2> getAllCars() {
+        return carRepository.findCars().stream()
+                .map(carMapper::toCarResponse2)
+                .toList();
 
+
+    }
 }

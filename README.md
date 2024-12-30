@@ -152,6 +152,11 @@ spring:
 ````
 
 ## How to generate interfaces in Angular using .yaml files and openapi generator:
+how to use open-pai angular cli generator:
+````
+https://openapi-generator.tech/docs/usage
+````
+
 ````
 https://www.kevinboosten.dev/how-i-use-an-openapi-spec-in-my-angular-projects
 https://openapi-generator.tech/docs/usage -> how to use cli

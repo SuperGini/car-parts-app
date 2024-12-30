@@ -6,6 +6,7 @@ export * from './carManufacturerRequest';
 export * from './carManufacturerResponse';
 export * from './carRequest';
 export * from './carResponse';
+export * from './carResponse2';
 export * from './currency';
 export * from './errorResponse';
 export * from './partFilterRequest';

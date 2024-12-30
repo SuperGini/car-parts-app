@@ -12,6 +12,7 @@ import com.gini.repository.ParManufacturerRepository;
 import com.gini.repository.PartRepository;
 import com.gini.repository.filters.PartFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -102,5 +103,15 @@ public class PartService {
 
         partRepositoryWithFilter.criteria2WithSpecification(x);
     }
+
+    @Transactional(readOnly = true)
+    public List<PartManufacturerResponse> getAllPartManufacturers() {
+       return parManufacturerRepository.getAllPartManufacturers()
+                .stream()
+                .map(partMapper::mapPartManufacturerResponse)
+                .toList();
+
+    }
+
 
 }
