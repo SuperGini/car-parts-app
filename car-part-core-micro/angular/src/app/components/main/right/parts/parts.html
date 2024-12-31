@@ -17,26 +17,26 @@
       </form>
       <!--      ----------------------------------------------------------    -->
       <!--      ADD Car ------------------------------------------------------------->
-      <form class="add-car">
+      <form class="add-car" [formGroup]="partForm">
         <div class="car-section">
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>part name</mat-label>
-            <input matInput>
+            <input matInput formControlName="partName">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>part number</mat-label>
-            <input matInput>
+            <input matInput formControlName="partNumber">
           </mat-form-field>
 
           <mat-form-field appearance="outline" class="form-field">
             <mat-label>price</mat-label>
-            <input matInput>
+            <input matInput formControlName="price">
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Currency</mat-label>
-              <mat-select>
+              <mat-select formControlName="currency">
                 @for (currency of currencies; track currency){
                   <mat-option [value]="currency">{{currency}}</mat-option>
                 }
@@ -45,7 +45,7 @@
 
           <mat-form-field>
             <mat-label>Cars</mat-label>
-            <mat-select>
+            <mat-select formControlName="carObj">
               @for (carModel of carModels; track carModel.id) {
                 <mat-option [value]="carModel">{{carModel.model}}</mat-option>
               }
@@ -54,14 +54,14 @@
 
           <mat-form-field>
             <mat-label>Part manufacturers</mat-label>
-            <mat-select>
+            <mat-select formControlName="partManufacturerObj">
               @for (partManufacturer of partManufacturers; track partManufacturer.id) {
                 <mat-option [value]="partManufacturer">{{partManufacturer.name}}</mat-option>
               }
             </mat-select>
           </mat-form-field>
         </div>
-        <button class="btn" mat-stroked-button>Add part</button>
+        <button class="btn" mat-stroked-button (click)="createPart()">Add part</button>
       </form>
     </div>
 

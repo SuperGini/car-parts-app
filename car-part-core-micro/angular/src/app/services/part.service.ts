@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {Gateway} from './gateway/gateway';
-import {PartManufacturerRequest} from '../core/api/v1';
+import {PartManufacturerRequest, PartRequest} from '../core/api/v1';
 
 @Injectable({providedIn: 'root'})
 export class PartService {
@@ -13,6 +13,10 @@ export class PartService {
 
   getAllPartManufacturers () {
     return this.gateway.getAllPartManufacturers();
+  }
+
+  createPart(partRequest:PartRequest) {
+    return this.gateway.createPart(partRequest);
   }
 
 

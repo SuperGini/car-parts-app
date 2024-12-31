@@ -7,7 +7,7 @@ import {
   CarManufacturerResponse,
   CarRequest,
   CarResponse, CarResponse2,
-  PartManufacturerRequest, PartManufacturerResponse
+  PartManufacturerRequest, PartManufacturerResponse, PartRequest, PartResponse
 } from '../../core/api/v1';
 
 @Injectable({providedIn: 'root'})
@@ -41,6 +41,10 @@ export class Gateway {
 
   getAllPartManufacturers() {
     return this.httpClient.get<PartManufacturerResponse[]>(`${environment.apiUrl}/part/manufacturers`);
+  }
+
+  createPart(partRequest: PartRequest){
+    return this.httpClient.post<PartResponse>(`${environment.apiUrl}/part`, partRequest);
   }
 
 }
