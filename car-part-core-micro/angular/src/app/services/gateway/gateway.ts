@@ -7,7 +7,7 @@ import {
   CarManufacturerResponse,
   CarRequest,
   CarResponse, CarResponse2,
-  PartManufacturerRequest, PartManufacturerResponse, PartRequest, PartResponse
+  PartManufacturerRequest, PartManufacturerResponse, PartRequest, PartResponse, PartResponse2
 } from '../../core/api/v1';
 
 @Injectable({providedIn: 'root'})
@@ -47,4 +47,7 @@ export class Gateway {
     return this.httpClient.post<PartResponse>(`${environment.apiUrl}/part`, partRequest);
   }
 
+  findPartByPartNumber(partNumber: string) {
+    return this.httpClient.get<PartResponse2>(`${environment.apiUrl}/part/find/${partNumber}`);
+  }
 }

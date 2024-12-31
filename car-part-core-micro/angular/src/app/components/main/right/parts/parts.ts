@@ -11,7 +11,7 @@ import {
   Currency,
   PartManufacturerRequest,
   PartManufacturerResponse,
-  PartRequest, PriceRequest
+  PartRequest, PartResponse, PartResponse2, PriceRequest
 } from '../../../../core/api/v1';
 import {PartService} from '../../../../services/part.service';
 import {successResponse} from '../../../../services/cache/cache';
@@ -42,6 +42,9 @@ export class Parts implements OnInit {
 
   protected readonly successResponse = successResponse;
   protected partManufacturerName = new FormControl('', Validators.required);
+  protected partSearch = new FormControl('', Validators.required);
+  protected searchPartResponse : PartResponse2 = null;
+
 
   protected partForm = new FormGroup({
     partName: new FormControl('', Validators.required),
@@ -54,6 +57,7 @@ export class Parts implements OnInit {
 
   protected partService = inject(PartService);
   protected carManufacturerService = inject(CarManufacturerService);
+
 
 
   ngOnInit(): void {
@@ -109,6 +113,14 @@ export class Parts implements OnInit {
       .subscribe(response => {
         console.log(`new part id: ${response.id}`);
       })
-
   }
+
+  findPartByPartNumber() {
+    const partNumber = this.partSearch.value
+    this.partService.findPartByPartNumber(partNumber)
+      .subscribe(response => {
+        console.log(response.partNumber);
+        this.searchPartResponse = response});
+  }
+
 }

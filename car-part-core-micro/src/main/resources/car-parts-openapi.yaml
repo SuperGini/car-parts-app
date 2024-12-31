@@ -165,6 +165,62 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+
+  /part/find/{partNumber}:
+    get:
+      tags:
+        - part
+      summary: Retrieves a part by part-number
+      description: Retrieves a new part from the database
+      operationId: findPartByPartNumber
+      parameters:
+        - name: partNumber
+          in: path
+          description: Part number that we are looking for
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartResponse2'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidPartId:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                PartAlreadyExists:
+                  value:
+                    message: Part already exists
+                    status: 400
+        '404':
+          description: Not found exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                PartNotfound:
+                  value:
+                    message: Part not found
+                    status: 404
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /part/paginated:
     post:
       tags:
@@ -609,6 +665,35 @@ components:
           description: identification number of the part
         price:
           $ref: '#/components/schemas/PriceResponse'
+    PartResponse2:
+      required:
+        - id
+        - name
+        - partNumber
+        - price
+        - manufacturer
+        - model
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: part id
+        name:
+          type: string
+          example: front fender
+          description: name of car part
+        partNumber:
+          type: string
+          example: 125-vf4-cffA-24
+          description: identification number of the part
+        price:
+          $ref: '#/components/schemas/PriceResponse'
+        manufacturer:
+          type: string
+          example: SKF
+        model:
+          type: string
+          example: Ford
     PriceResponse:
       required:
         - currency

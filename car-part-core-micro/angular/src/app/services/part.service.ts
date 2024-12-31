@@ -20,4 +20,7 @@ export class PartService {
   }
 
 
+  findPartByPartNumber(partNumber: string) {
+    return this.gateway.findPartByPartNumber(partNumber)
+  }
 }

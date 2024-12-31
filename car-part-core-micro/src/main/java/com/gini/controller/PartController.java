@@ -7,6 +7,7 @@ import com.gini.dto.PartManufacturerRequest;
 import com.gini.dto.PartManufacturerResponse;
 import com.gini.dto.PartRequest;
 import com.gini.dto.PartResponse;
+import com.gini.dto.PartResponse2;
 import com.gini.model.Part;
 import com.gini.repository.filters.PartFilter;
 import com.gini.service.CarService;
@@ -47,6 +48,13 @@ public class PartController implements PartApi {
     }
 
     @Override
+    public ResponseEntity<PartResponse2> findPartByPartNumber(String partNumber) {
+        var response = partService.findPartByPartNumber2(partNumber);
+        return ResponseEntity.ok(response);
+
+    }
+
+    @Override
     public ResponseEntity<List<PartManufacturerResponse>> getAllPartManufacturers() {
         return ResponseEntity.ok(partService.getAllPartManufacturers());
     }
@@ -54,12 +62,12 @@ public class PartController implements PartApi {
     @Override
     public ResponseEntity<List<CarFilterResponse>> getPartsForCarPaginated(PartFilterRequest partFilterRequest) {
         log.info("entering paginated controller");
-        var x =carService.getAllPartsWithSpecificationPaginationAndSorting2(partFilterRequest);
+        var x = carService.getAllPartsWithSpecificationPaginationAndSorting2(partFilterRequest);
         return ResponseEntity.ok(x);
     }
 
     @GetMapping("/part/filter")
-    public List<Part> finAllPartsWithFilter (@RequestBody PartFilter partFilter) {
+    public List<Part> finAllPartsWithFilter(@RequestBody PartFilter partFilter) {
 
         partService.criteriabuilder(partFilter);
 

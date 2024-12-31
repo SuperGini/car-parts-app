@@ -70,30 +70,30 @@
       <!--      search--------------------->
       <mat-form-field appearance="outline" class="form-field">
         <fa-icon icon="magnifying-glass" class="icon fa-xl"></fa-icon>
-        <input matInput>
+        <input matInput [formControl]="partSearch" (keyup.enter)="findPartByPartNumber()">
       </mat-form-field>
       <!---->
       <!--      PART info-->
       <div class="info-part-container">
         <div class="info-part">
           <p>part name:</p>
-          <p> bujie</p>
+          <p>{{searchPartResponse?.name}}</p>
         </div>
         <div class="info-part">
           <p>part number:</p>
-          <p> 1122-89-pt-r5</p>
+          <p>{{searchPartResponse?.partNumber}}</p>
         </div>
         <div class="info-part">
           <p>manufacturer:</p>
-          <p> skf</p>
+          <p>{{searchPartResponse?.manufacturer}}</p>
         </div>
         <div class="info-part">
           <p>price:</p>
-          <p> 25 Ron</p>
+          <p>{{searchPartResponse?.price.price}} {{searchPartResponse?.price.currency}}</p>
         </div>
         <div class="info-part">
           <p>model:</p>
-          <p> Ford</p>
+          <p>{{searchPartResponse?.model}}</p>
         </div>
       </div>
       <!--      ------------------------------------------>

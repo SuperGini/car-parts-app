@@ -5,6 +5,7 @@ import com.gini.model.Currency;
 import com.gini.model.Part;
 import com.gini.model.PartManufacturer;
 import com.gini.model.Price;
+import com.gini.model.views.PartView2;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -48,24 +49,25 @@ public class PartMapper {
                 .price(part.getPrice().getPartPrice())
                 .currency(com.gini.dto.Currency.valueOf(part.getPrice().getCurrency().toString()));
 
-        var partResponse = new PartResponse()
+        return new PartResponse()
                 .id(UUID.fromString(part.getId()))
                 .name(part.getName())
                 .partNumber(part.getPartNumber())
                 .price(price);
-
-        return partResponse;
-
     }
 
+    public PartResponse2 mapPartResponse2(PartView2 part) {
+        var price = new PriceResponse()
+                .price(part.getPrice().getPartPrice())
+                .currency(com.gini.dto.Currency.valueOf(part.getPrice().getCurrency().toString()));
 
-
-
-
-
-
-
-
-
+        return new PartResponse2()
+                .id(UUID.fromString(part.getId()))
+                .name(part.getName())
+                .partNumber(part.getPartNumber())
+                .model(part.getCar().getModel())
+                .manufacturer(part.getPartManufacturer().getName())
+                .price(price);
+    }
 
 }

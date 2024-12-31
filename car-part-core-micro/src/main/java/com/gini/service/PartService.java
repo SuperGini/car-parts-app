@@ -4,21 +4,25 @@ import com.gini.dto.PartManufacturerRequest;
 import com.gini.dto.PartManufacturerResponse;
 import com.gini.dto.PartRequest;
 import com.gini.dto.PartResponse;
+import com.gini.dto.PartResponse2;
+import com.gini.error.exceptions.NotFoundException;
 import com.gini.mapper.PartMapper;
 import com.gini.model.Part;
 import com.gini.repository.CarRepository;
-import com.gini.repository.PartRepositoryWithFilter;
 import com.gini.repository.ParManufacturerRepository;
 import com.gini.repository.PartRepository;
+import com.gini.repository.PartRepositoryWithFilter;
 import com.gini.repository.filters.PartFilter;
+import com.gini.repository.view.PartViewRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PartService {
@@ -28,6 +32,7 @@ public class PartService {
     private final ParManufacturerRepository parManufacturerRepository;
     private final CarRepository carRepository;
     private final PartRepositoryWithFilter partRepositoryWithFilter;
+    private final PartViewRepository partViewRepository;
 
     @Transactional
     public PartManufacturerResponse save(PartManufacturerRequest partManufacturerRequest) {
@@ -63,7 +68,7 @@ public class PartService {
     @Transactional(readOnly = true)
     public List<Part> getAllPartsFiltered(PartFilter partFilter) {
 
-      var x =  partRepositoryWithFilter.findPartWithFilter(partFilter);
+        var x = partRepositoryWithFilter.findPartWithFilter(partFilter);
 
         return x;
     }
@@ -72,7 +77,7 @@ public class PartService {
     public List<Part> getAllPartsFiltered2(PartFilter partFilter) {
 
 
-       var x = partRepository.findAll(partRepositoryWithFilter.findPartWithFilter2(partFilter));
+        var x = partRepository.findAll(partRepositoryWithFilter.findPartWithFilter2(partFilter));
 
         x.forEach(c -> {
             System.out.println(c.getPartManufacturer().getName());
@@ -84,7 +89,7 @@ public class PartService {
 
         });
 
-       return null;
+        return null;
 
 
     }
@@ -96,7 +101,7 @@ public class PartService {
     }
 
     @Transactional(readOnly = true)
-    public void criteriaBuidler2 (PartFilter partFilter) {
+    public void criteriaBuidler2(PartFilter partFilter) {
 
         var x = partRepositoryWithFilter.findPartWithFilter2(partFilter);
 
@@ -106,12 +111,17 @@ public class PartService {
 
     @Transactional(readOnly = true)
     public List<PartManufacturerResponse> getAllPartManufacturers() {
-       return parManufacturerRepository.getAllPartManufacturers()
+        return parManufacturerRepository.getAllPartManufacturers()
                 .stream()
                 .map(partMapper::mapPartManufacturerResponse)
                 .toList();
 
     }
 
-
+    @Transactional(readOnly = true)
+    public PartResponse2 findPartByPartNumber2(String partNumber) {
+        return partViewRepository.findByPartNumber(partNumber)
+                .map(partMapper::mapPartResponse2)
+                .orElseThrow(() -> new NotFoundException("Part not found"));
+    }
 }

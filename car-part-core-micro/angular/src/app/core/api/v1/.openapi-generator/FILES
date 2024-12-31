@@ -27,6 +27,7 @@ model/partManufacturerRequest.ts
 model/partManufacturerResponse.ts
 model/partRequest.ts
 model/partResponse.ts
+model/partResponse2.ts
 model/priceRequest.ts
 model/priceResponse.ts
 param.ts
