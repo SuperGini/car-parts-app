@@ -1,11 +1,11 @@
 import {inject, Injectable} from '@angular/core';
 import {Gateway} from './gateway/gateway';
-import {PartManufacturerRequest, PartRequest} from '../core/api/v1';
+import {AfPartRequest, PartManufacturerRequest, PartRequest} from '../core/api/v1';
 
 @Injectable({providedIn: 'root'})
 export class PartService {
 
-  gateway = inject(Gateway);
+  private gateway = inject(Gateway);
 
   createPartManufacturer(partManufacturerRequest: PartManufacturerRequest) {
     return this.gateway.createPartManufacturer(partManufacturerRequest);
@@ -22,5 +22,9 @@ export class PartService {
 
   findPartByPartNumber(partNumber: string) {
     return this.gateway.findPartByPartNumber(partNumber)
+  }
+
+  createAfPart(afPartRequest: AfPartRequest) {
+    return this.gateway.createAfPart(afPartRequest);
   }
 }

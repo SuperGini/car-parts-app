@@ -66,7 +66,7 @@
     </div>
 
 
-    <form class="af-form">
+    <div class="search-part">
       <!--      search--------------------->
       <mat-form-field appearance="outline" class="form-field">
         <fa-icon icon="magnifying-glass" class="icon fa-xl"></fa-icon>
@@ -98,22 +98,32 @@
       </div>
       <!--      ------------------------------------------>
       <!--    ADD Af Part----------------------------------------------------------->
-      <mat-form-field appearance="outline" class="form-field">
-        <mat-label> af part number</mat-label>
-        <input matInput>
-      </mat-form-field>
+      <form class="af-form">
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label> af part number</mat-label>
+          <input matInput [formControl]="afPartNumber">
+        </mat-form-field>
 
-      <mat-form-field>
-        <mat-label>Currency</mat-label>
-        <mat-select>
-          @for (currency of currencies; track currency){
-            <mat-option [value]="currency">{{currency}}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label> price</mat-label>
+          <input matInput [formControl]="afPrice">
+        </mat-form-field>
 
-      <button class="btn" mat-stroked-button>Add af part</button>
-    </form>
+        <mat-form-field>
+          <mat-label>Currency</mat-label>
+          <mat-select [formControl]="currencySelection">
+            @for (currency of currencies; track currency){
+              <mat-option [value]="currency">{{currency}}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <button class="btn" mat-stroked-button (click)="createAfPart()">Add af part</button>
+
+
+      </form>
+
+    </div>
     <!--    ---------------------------------------------------------------------------->
   </div>
 </div>

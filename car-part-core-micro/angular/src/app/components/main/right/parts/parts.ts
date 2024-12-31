@@ -7,11 +7,14 @@ import {MatOption} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
 import {FaIconComponent} from '@fortawesome/angular-fontawesome';
 import {
+  AfPartRequest,
   CarResponse2,
   Currency,
   PartManufacturerRequest,
   PartManufacturerResponse,
-  PartRequest, PartResponse, PartResponse2, PriceRequest
+  PartRequest,
+  PartResponse2,
+  PriceRequest
 } from '../../../../core/api/v1';
 import {PartService} from '../../../../services/part.service';
 import {successResponse} from '../../../../services/cache/cache';
@@ -43,8 +46,10 @@ export class Parts implements OnInit {
   protected readonly successResponse = successResponse;
   protected partManufacturerName = new FormControl('', Validators.required);
   protected partSearch = new FormControl('', Validators.required);
+  protected afPartNumber = new FormControl('', Validators.required);
+  protected currencySelection = new FormControl('', Validators.required);
+  protected afPrice = new FormControl('', Validators.required);
   protected searchPartResponse : PartResponse2 = null;
-
 
   protected partForm = new FormGroup({
     partName: new FormControl('', Validators.required),
@@ -57,7 +62,6 @@ export class Parts implements OnInit {
 
   protected partService = inject(PartService);
   protected carManufacturerService = inject(CarManufacturerService);
-
 
 
   ngOnInit(): void {
@@ -121,6 +125,24 @@ export class Parts implements OnInit {
       .subscribe(response => {
         console.log(response.partNumber);
         this.searchPartResponse = response});
+  }
+
+  createAfPart() {
+    const price : PriceRequest = {
+      price: Number(this.afPrice.value),
+      currency: <Currency> this.currencySelection.value
+    }
+
+    const afPartRequest: AfPartRequest = {
+      afPartNumber: this.afPartNumber.value,
+      price: price,
+      partId: this.searchPartResponse.id
+    }
+
+    this.partService.createAfPart(afPartRequest)
+      .subscribe(response => {
+        console.log(`af part with id: ${response.id} was created`);
+      })
   }
 
 }

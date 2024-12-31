@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 
 import {environment} from '../../../environments/environment';
 import {
+  AfPartRequest, AfPartResponse,
   CarManufacturerRequest,
   CarManufacturerResponse,
   CarRequest,
@@ -13,7 +14,7 @@ import {
 @Injectable({providedIn: 'root'})
 export class Gateway {
 
-  httpClient = inject(HttpClient);
+  protected httpClient = inject(HttpClient);
 
   //car--------------------------------------------
 
@@ -50,4 +51,9 @@ export class Gateway {
   findPartByPartNumber(partNumber: string) {
     return this.httpClient.get<PartResponse2>(`${environment.apiUrl}/part/find/${partNumber}`);
   }
+
+  createAfPart(afPartRequest: AfPartRequest) {
+    return this.httpClient.post<AfPartResponse>(`${environment.apiUrl}/af-part`, afPartRequest);
+  }
+
 }
