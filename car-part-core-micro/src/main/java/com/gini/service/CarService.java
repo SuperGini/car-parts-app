@@ -34,7 +34,7 @@ public class CarService {
     private final CarRepository carRepository;
     private final CarManufacturerRepository carManufacturerRepository;
     private final CarMapper carMapper;
-    private final CarViewRepository partViewRepository;
+    private final CarViewRepository carViewRepository;
 
     @Transactional
     public CarManufacturerResponse saveCarManufacturer(CarManufacturerRequest carManufacturerRequest) {
@@ -68,7 +68,7 @@ public class CarService {
         Pageable page = PageRequest.of(0, 2, Sort.by(Car_.MODEL).ascending().and(Sort.by(Car_.ID).ascending()));
 
         log.info("searching in the database for parts paginated");
-        var x = partViewRepository.findAll(filter, page);
+        var x = carViewRepository.findAll(filter, page);
 
         var response = new ArrayList<CarFilterResponse>();
 
@@ -87,7 +87,7 @@ public class CarService {
     @Transactional(readOnly = true)
     public PartView getAllParts() {
 
-        var x = partViewRepository.findAll();
+        var x = carViewRepository.findAll();
 
 
         x.forEach(c -> {
@@ -121,7 +121,7 @@ public class CarService {
 
         BlazeFilder filter = new BlazeFilder(carFilter);
 
-        var x = partViewRepository.findAll(filter);
+        var x = carViewRepository.findAll(filter);
 
 
         x.forEach(c -> {
@@ -158,7 +158,7 @@ public class CarService {
 
         Pageable page = PageRequest.of(0, 2, Sort.by(Car_.MODEL).ascending().and(Sort.by(Car_.ID).ascending()));
 
-        var x = partViewRepository.findAll(filter, page);
+        var x = carViewRepository.findAll(filter, page);
 
 
         x.forEach(c -> {

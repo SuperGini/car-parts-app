@@ -264,6 +264,49 @@ paths:
                   value:
                     message: Car name required
                     status: 400
+  /part/filter2:
+    post:
+      tags:
+        - part
+      summary: Gets all the parts for a car model paginated
+      description: Adds a new car manufacturer in the database
+      operationId: getPartsPaginatedWithFilter
+      requestBody:
+        description: Get all parts paginated
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartFilterRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PartResponse2'
+        '400':
+          description: Validation exception
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              # multiple error examples
+              examples:
+                InvalidFilterFields:
+                  value:
+                    message: Invalid fields
+                    status: 400
+                NotFound:
+                  value:
+                    message: Part or model not found
+                    status: 404
+                ModelNameRequired:
+                  value:
+                    message: Car name required
+                    status: 400
   /part/manufacturers:
     get:
       tags:
@@ -705,8 +748,6 @@ components:
           type: number
           example: 145.20
     PartFilterRequest:
-      required:
-        - carModel
       properties:
         carModel:
           type: string
@@ -716,7 +757,7 @@ components:
           example: Dacia
         partName:
           type: string
-          example: rulment
+          example: bearing
         partManufacturerName:
           type: string
           example: SKF
@@ -726,6 +767,14 @@ components:
         endPrice:
           type: number
           example: 100.58
+        page:
+          type: integer
+          format: int32
+          example: 1
+        pageElements:
+          type: integer
+          format: int32
+          example: 10
     CarFilterResponse:
       required:
         - id

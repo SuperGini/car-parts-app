@@ -66,6 +66,12 @@ public class PartController implements PartApi {
         return ResponseEntity.ok(x);
     }
 
+    @Override
+    public ResponseEntity<List<PartResponse2>> getPartsPaginatedWithFilter(PartFilterRequest partFilterRequest) {
+        var response = partService.findAllPartsPaginatedWithFilter(partFilterRequest);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/part/filter")
     public List<Part> finAllPartsWithFilter(@RequestBody PartFilter partFilter) {
 
@@ -74,4 +80,5 @@ public class PartController implements PartApi {
         return null;
 
     }
+
 }

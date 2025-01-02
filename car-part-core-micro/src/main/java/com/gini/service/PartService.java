@@ -1,5 +1,6 @@
 package com.gini.service;
 
+import com.gini.dto.PartFilterRequest;
 import com.gini.dto.PartManufacturerRequest;
 import com.gini.dto.PartManufacturerResponse;
 import com.gini.dto.PartRequest;
@@ -8,14 +9,19 @@ import com.gini.dto.PartResponse2;
 import com.gini.error.exceptions.NotFoundException;
 import com.gini.mapper.PartMapper;
 import com.gini.model.Part;
+import com.gini.model.Part_;
 import com.gini.repository.CarRepository;
 import com.gini.repository.ParManufacturerRepository;
 import com.gini.repository.PartRepository;
 import com.gini.repository.PartRepositoryWithFilter;
 import com.gini.repository.filters.PartFilter;
+import com.gini.repository.filters.PartFilterSpec;
 import com.gini.repository.view.PartViewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -123,5 +129,19 @@ public class PartService {
         return partViewRepository.findByPartNumber(partNumber)
                 .map(partMapper::mapPartResponse2)
                 .orElseThrow(() -> new NotFoundException("Part not found"));
+    }
+
+    @Transactional
+    public List<PartResponse2> findAllPartsPaginatedWithFilter(PartFilterRequest partFilterRequest) {
+        var filter = new PartFilterSpec(partFilterRequest);
+
+        Pageable x = PageRequest.of(0, 10, Sort.by(Part_.NAME).descending().and(Sort.by(Part_.ID).ascending()));
+
+        return partViewRepository.findAll(filter, x)
+                .get()
+                .map(partMapper::mapPartResponse2)
+                .toList();
+
+
     }
 }
