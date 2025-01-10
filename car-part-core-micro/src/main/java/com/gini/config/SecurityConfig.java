@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
@@ -29,7 +30,7 @@ public class SecurityConfig {
         requestCache.setMatchingRequestParameterName(null);
         http
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll()
+                        .anyRequest().authenticated()
                 )
 //                https://stackoverflow.com/questions/75222930/spring-boot-3-0-2-adds-continue-query-parameter-to-request-url-after-login
                 .requestCache(cache -> cache.requestCache(requestCache))
@@ -47,6 +48,8 @@ public class SecurityConfig {
                 .csrfTokenRepository(customCookieCsrfTokenRepository)
                 .csrfTokenRequestHandler(x)
         );
+
+        http.csrf(AbstractHttpConfigurer::disable);
 
         //done automatically by spring
 //        http.sessionManagement(s ->

@@ -3,12 +3,20 @@ import {HttpClient} from '@angular/common/http';
 
 import {environment} from '../../../environments/environment';
 import {
-  AfPartRequest, AfPartResponse,
+  AfPartRequest,
+  AfPartResponse,
   CarManufacturerRequest,
   CarManufacturerResponse,
   CarRequest,
-  CarResponse, CarResponse2,
-  PartManufacturerRequest, PartManufacturerResponse, PartRequest, PartResponse, PartResponse2
+  CarResponse,
+  CarResponse2,
+  PartFilterRequest,
+  PartManufacturerRequest,
+  PartManufacturerResponse,
+  PartRequest,
+  PartResponse,
+  PartResponse2,
+  PartResponse2Wrapper
 } from '../../core/api/v1';
 
 @Injectable({providedIn: 'root'})
@@ -18,11 +26,11 @@ export class Gateway {
 
   //car--------------------------------------------
 
-  createManufacturer (carManufacturer: CarManufacturerRequest) {
+  createManufacturer(carManufacturer: CarManufacturerRequest) {
     return this.httpClient.post<CarManufacturerResponse>(`${environment.apiUrl}/car/car-manufacturer`, carManufacturer);
   }
 
-  getAllCarrManufacturers () {
+  getAllCarrManufacturers() {
     return this.httpClient.get<CarManufacturerResponse[]>(`${environment.apiUrl}/car/manufacturers`);
   }
 
@@ -44,7 +52,7 @@ export class Gateway {
     return this.httpClient.get<PartManufacturerResponse[]>(`${environment.apiUrl}/part/manufacturers`);
   }
 
-  createPart(partRequest: PartRequest){
+  createPart(partRequest: PartRequest) {
     return this.httpClient.post<PartResponse>(`${environment.apiUrl}/part`, partRequest);
   }
 
@@ -54,6 +62,10 @@ export class Gateway {
 
   createAfPart(afPartRequest: AfPartRequest) {
     return this.httpClient.post<AfPartResponse>(`${environment.apiUrl}/af-part`, afPartRequest);
+  }
+
+  getPartsPaginatedWithFilter(partFilterRequest: PartFilterRequest) {
+    return this.httpClient.post<PartResponse2Wrapper>(`${environment.apiUrl}/part/filter2`, partFilterRequest);
   }
 
 }

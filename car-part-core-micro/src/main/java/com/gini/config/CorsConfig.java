@@ -15,8 +15,8 @@ public class CorsConfig {
         http.cors( c -> {
             CorsConfigurationSource source = s -> {
                 CorsConfiguration cc = new CorsConfiguration();
-                cc.setAllowCredentials(true);
-                cc.setAllowedOrigins(List.of("*"));
+//                cc.setAllowCredentials(true);
+                cc.setAllowedOrigins(List.of("*", "http://localhost:4200", "http://localhost:8080"));
                 cc.setAllowedHeaders(List.of("*")); // -> all types of headers
                 cc.setAllowedMethods(List.of("*")); // -> all types of methods
                 return cc;

@@ -15,10 +15,16 @@ import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * https://stackoverflow.com/questions/77464478/creating-dynamic-entity-views-with-blazebit-persistence
+ * https://persistence.blazebit.com/documentation/1.6/entity-view/manual/en_US/index.html#fetching-a-data-subset
+ */
 
 @RequiredArgsConstructor
 public class PartFilterSpec implements Specification<Part> {
@@ -35,8 +41,7 @@ public class PartFilterSpec implements Specification<Part> {
         Join<Part, Car> partCarJoin = root.join(Part_.CAR, JoinType.INNER);
         Join<Part, Price> partPriceJoin = root.join(Part_.PRICE, JoinType.INNER);
 
-
-        if (partFilter.getCarModel() != null) {
+        if (!StringUtils.isEmpty(partFilter.getCarModel())) {
             var condition = criteriaBuilder.equal(partCarJoin.get(Car_.MODEL), partFilter.getCarModel());
 //            predicates.add(criteriaBuilder.and(condition));
             predicates.add(condition);

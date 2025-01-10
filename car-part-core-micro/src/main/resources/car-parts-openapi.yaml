@@ -284,9 +284,7 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/PartResponse2'
+                $ref: '#/components/schemas/PartResponse2Wrapper'
         '400':
           description: Validation exception
           content:
@@ -737,6 +735,16 @@ components:
         model:
           type: string
           example: Ford
+    PartResponse2Wrapper:
+      properties:
+        totalNrOfElements:
+          type: number
+          format: int64
+          description: total number of parts from the database. The number is necessary so Angular knows what page number to request
+        partsResponse:
+          type: array
+          items:
+            $ref: '#/components/schemas/PartResponse2'
     PriceResponse:
       required:
         - currency
@@ -748,6 +756,9 @@ components:
           type: number
           example: 145.20
     PartFilterRequest:
+      required:
+        - page
+        - pageElements
       properties:
         carModel:
           type: string

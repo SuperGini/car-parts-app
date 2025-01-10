@@ -6,6 +6,7 @@ import com.gini.dto.PartManufacturerResponse;
 import com.gini.dto.PartRequest;
 import com.gini.dto.PartResponse;
 import com.gini.dto.PartResponse2;
+import com.gini.dto.PartResponse2Wrapper;
 import com.gini.error.exceptions.NotFoundException;
 import com.gini.mapper.PartMapper;
 import com.gini.model.Part;
@@ -25,6 +26,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Set;
 
@@ -131,17 +133,22 @@ public class PartService {
                 .orElseThrow(() -> new NotFoundException("Part not found"));
     }
 
-    @Transactional
-    public List<PartResponse2> findAllPartsPaginatedWithFilter(PartFilterRequest partFilterRequest) {
+    @Transactional(readOnly = true)
+    public PartResponse2Wrapper findAllPartsPaginatedWithFilter(PartFilterRequest partFilterRequest) {
         var filter = new PartFilterSpec(partFilterRequest);
 
-        Pageable x = PageRequest.of(0, 10, Sort.by(Part_.NAME).descending().and(Sort.by(Part_.ID).ascending()));
+        Pageable x = PageRequest.of(partFilterRequest.getPage(), partFilterRequest.getPageElements(), Sort.by(Part_.NAME).descending().and(Sort.by(Part_.ID).ascending()));
 
-        return partViewRepository.findAll(filter, x)
-                .get()
+        var partsDb =  partViewRepository.findAll(filter, x);
+
+        var totalNrOfElements = partsDb.getTotalElements();
+
+        var partsListResponse= partsDb.get()
                 .map(partMapper::mapPartResponse2)
                 .toList();
 
-
+        return new PartResponse2Wrapper()
+                .totalNrOfElements(BigDecimal.valueOf(totalNrOfElements))
+                .partsResponse(partsListResponse);
     }
 }

@@ -167,8 +167,8 @@ public class PartRepositoryWithFilter {
         }
 
         if(filter.getEndDate() != null) {
-            var condittion = critBuilder.lessThanOrEqualTo(carJoin.get(Car_.productionEndYear), filter.getEndDate());
-            predicates.add(condittion);
+            var condition = critBuilder.lessThanOrEqualTo(carJoin.get(Car_.productionEndYear), filter.getEndDate());
+            predicates.add(condition);
         }
 
         if(filter.getStartPrice() != null && filter.getEndPrice() != null) {

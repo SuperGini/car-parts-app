@@ -16,5 +16,6 @@ export * from './partManufacturerResponse';
 export * from './partRequest';
 export * from './partResponse';
 export * from './partResponse2';
+export * from './partResponse2Wrapper';
 export * from './priceRequest';
 export * from './priceResponse';

@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {Gateway} from './gateway/gateway';
-import {AfPartRequest, PartManufacturerRequest, PartRequest} from '../core/api/v1';
+import {AfPartRequest, PartFilterRequest, PartManufacturerRequest, PartRequest} from '../core/api/v1';
 
 @Injectable({providedIn: 'root'})
 export class PartService {
@@ -26,5 +26,9 @@ export class PartService {
 
   createAfPart(afPartRequest: AfPartRequest) {
     return this.gateway.createAfPart(afPartRequest);
+  }
+
+  getPartsPaginatedWithFilter(partFilterRequest: PartFilterRequest) {
+    return this.gateway.getPartsPaginatedWithFilter(partFilterRequest);
   }
 }

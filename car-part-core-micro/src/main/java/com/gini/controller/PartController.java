@@ -8,6 +8,7 @@ import com.gini.dto.PartManufacturerResponse;
 import com.gini.dto.PartRequest;
 import com.gini.dto.PartResponse;
 import com.gini.dto.PartResponse2;
+import com.gini.dto.PartResponse2Wrapper;
 import com.gini.model.Part;
 import com.gini.repository.filters.PartFilter;
 import com.gini.service.CarService;
@@ -67,7 +68,7 @@ public class PartController implements PartApi {
     }
 
     @Override
-    public ResponseEntity<List<PartResponse2>> getPartsPaginatedWithFilter(PartFilterRequest partFilterRequest) {
+    public ResponseEntity<PartResponse2Wrapper> getPartsPaginatedWithFilter(PartFilterRequest partFilterRequest) {
         var response = partService.findAllPartsPaginatedWithFilter(partFilterRequest);
         return ResponseEntity.ok(response);
     }

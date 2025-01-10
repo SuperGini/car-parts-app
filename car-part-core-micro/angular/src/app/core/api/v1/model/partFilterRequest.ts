@@ -10,11 +10,13 @@
 
 
 export interface PartFilterRequest { 
-    carModel: string;
+    carModel?: string;
     manufacturerName?: string;
     partName?: string;
     partManufacturerName?: string;
     startPrice?: number;
     endPrice?: number;
+    page: number;
+    pageElements: number;
 }
 
