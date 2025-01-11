@@ -1,0 +1,30 @@
+server:
+  port: 9091
+
+spring:
+  application:
+    name: car-part-front-micro
+
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: front-micro
+            client-secret: uso9lsuyEKVhZj7vLSdBWHjsDJrjwwSM
+            authorization-grant-type: authorization_code
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          keycloak:
+            user-name-attribute: preferred_username
+            authorization-uri: http://localhost:8080/realms/GINI/protocol/openid-connect/auth
+            token-uri: http://localhost:8080/realms/GINI/protocol/openid-connect/token
+            user-info-uri: http://localhost:8080/realms/GINI/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:8080/realms/GINI/protocol/openid-connect/certs
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+        web: DEBUG

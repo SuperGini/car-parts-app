@@ -176,3 +176,8 @@ After creating the local environment run the comand to buit with the local value
 ```
 ng build --configuration local
 ```
+
+## Maven multi-module project
+To run all the project in the same window of the Intellij IDEa IDE go to the Maven icon
+on the right side and push the  + button and then select the directory car-part-front-micro
+and car-part-core-micro and then save.
