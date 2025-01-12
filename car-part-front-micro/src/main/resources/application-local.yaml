@@ -22,6 +22,10 @@ spring:
             user-info-uri: http://localhost:8080/realms/GINI/protocol/openid-connect/userinfo
             jwk-set-uri: http://localhost:8080/realms/GINI/protocol/openid-connect/certs
 
+  web:
+    resources:
+      static-locations: classpath:/static/browser
+
 logging:
   level:
     org:
