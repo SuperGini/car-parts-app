@@ -24,7 +24,10 @@ spring:
 
   web:
     resources:
-      static-locations: classpath:/static/browser
+      static-locations: classpath:/static/browser, classpath:/templates/login
+
+  thymeleaf:
+    prefix: classpath:/templates/
 
 logging:
   level:

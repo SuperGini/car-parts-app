@@ -8,7 +8,11 @@ public class IndexControler {
 
     //for this to work in Angular i redirect -> "" to main/cars
     //and in the .yaml file i tell it that the index.html is in the browser folder
-    @GetMapping({"", "main/**", "/"})
+    @GetMapping({"",
+            "main/**",
+            "/",
+            "/loginx"
+    })
     public String redirectToMainPage() {
         return "forward:/index.html";
     }

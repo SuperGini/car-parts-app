@@ -10,7 +10,7 @@ export const routes: Routes = [
 
 
   {
-    path: 'login',
+    path: 'loginx',
     component: LoginComponent,
     pathMatch: 'full',
   },

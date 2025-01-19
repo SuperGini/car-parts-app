@@ -68,6 +68,7 @@ spring:
             client-id: core-micro
             client-secret: FkueNg3bD8pFGN9yKR3o63stqxktKEPG
             authorization-grant-type: authorization_code
+            scope: openid
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
         provider:
           keycloak:

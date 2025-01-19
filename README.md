@@ -133,7 +133,7 @@ install font awesome:
 https://github.com/FortAwesome/angular-fontawesome
 https://github.com/FortAwesome/angular-fontawesome/blob/main/docs/usage/icon-library.md#using-the-icon-library
 
-fixing imports of _ scss files in components scss files: https://stackoverflow.com/questions/70058183/cant-use-sass-variables-in-angular-from-global-file-despite-other-styles-worki
+fixing imports of _scss files in components scss files: https://stackoverflow.com/questions/70058183/cant-use-sass-variables-in-angular-from-global-file-despite-other-styles-worki
 
 when building the angular project set the outputPath from angular.json file to:
 ````
