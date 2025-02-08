@@ -581,7 +581,7 @@ export class PartService {
             }
         }
 
-        let localVarPath = `/part/filter2`;
+        let localVarPath = `/part/core-micro/filter2`;
         return this.httpClient.request<PartResponse2Wrapper>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

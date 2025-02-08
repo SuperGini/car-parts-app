@@ -29,6 +29,9 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
 
+core:
+  micro-url: http://localhost:9090
+
 logging:
   level:
     org:

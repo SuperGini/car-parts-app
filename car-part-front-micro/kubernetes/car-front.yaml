@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: car-front-deployment
+  labels:
+    app: car-front-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: car-front
+  template:
+    metadata:
+      labels:
+        app: car-front
+    spec:
+      containers:
+        - name: car-front-container
+          image: ginitoru/car-front:6
+          ports:
+            - containerPort: 9091
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              port: 9091
+              path: /actuator/health/liveness
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: minikube
+            - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET
+              value: 9y9YPvRmRzIzLbIXEYLpat4HKJSmG37Y
+            - name: KEYCLOAK_URI
+              value: "127.0.0.1"
+            - name: KEYCLOAK_PORT
+              value: "8080"
+            - name: INTERNAL_KEYCLOAK_URI
+              value: "keycloak.default"
+            - name: INTERNAL_KEYCLOAK_PORT
+              value: "8080"
+            - name: CORE_MICRO_URL
+              value: "car-core-micro-service.default"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: car-front-service
+spec:
+  selector:
+    app: car-front
+  ports:
+    - port: 9091
+      protocol: TCP
+      targetPort: 9091
+  type: LoadBalancer
+  
