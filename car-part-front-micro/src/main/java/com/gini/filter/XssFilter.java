@@ -12,8 +12,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 
-@Order(value = Integer.MIN_VALUE)
-@Component
+//@Order(value = Integer.MIN_VALUE)
+//@Component
 @RequiredArgsConstructor
 public class XssFilter extends OncePerRequestFilter {
 
@@ -28,7 +28,8 @@ public class XssFilter extends OncePerRequestFilter {
         var modifiedRequest = new XssRequestWrapper(request, objectMapper);
 
 
-        filterChain.doFilter(modifiedRequest, response);
+//        filterChain.doFilter(modifiedRequest, response);
+        filterChain.doFilter(request, response);
 
     }
 }

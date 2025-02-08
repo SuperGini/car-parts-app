@@ -3,6 +3,20 @@ server:
   servlet:
     session:
       timeout: 60s
+#    context-path: /micro-core
+
+management:
+  server:
+    port: 9095
+  endpoints:
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+      probes:
+        enabled: true
+    info:
+      enabled: true
 
 spring:
   application:
@@ -89,4 +103,3 @@ logging:
     org:
       springframework:
         security: DEBUG
-

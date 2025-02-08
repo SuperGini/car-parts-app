@@ -32,6 +32,7 @@ spring:
 logging:
   level:
     org:
-      springframework:
-        security: DEBUG
-        web: DEBUG
+      springframework: DEBUG
+#        security: DEBUG
+#        web: DEBUG
+#        cloud: DEBUG

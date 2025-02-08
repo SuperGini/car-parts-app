@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate:api": "openapi-generator-cli generate -i ./../src/main/resources/car-parts-openapi.yaml -g typescript-angular -o src/app/core/api/v1 --server-variables=host=localhost,port=9090 --additional-properties=stringEnums=true"
   },
   "private": true,
   "dependencies": {

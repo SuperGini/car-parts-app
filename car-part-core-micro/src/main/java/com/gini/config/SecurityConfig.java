@@ -49,6 +49,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/**").authenticated()
+                        .requestMatchers("/actuator/health/liveness").permitAll()
                         .anyRequest().authenticated()
                 )
 //                https://stackoverflow.com/questions/75222930/spring-boot-3-0-2-adds-continue-query-parameter-to-request-url-after-login
@@ -68,14 +69,14 @@ public class SecurityConfig {
         http.addFilterBefore(new XcsrfFilter(), CsrfFilter.class);
 
 
-        var x = new CsrfTokenRequestAttributeHandler();
-        x.setCsrfRequestAttributeName(null);
-
-        http.csrf(csrf -> csrf
-
-                .csrfTokenRepository(customCookieCsrfTokenRepository)
-                .csrfTokenRequestHandler(x)
-        );
+//        var x = new CsrfTokenRequestAttributeHandler();
+//        x.setCsrfRequestAttributeName(null);
+//
+//        http.csrf(csrf -> csrf
+//
+//                .csrfTokenRepository(customCookieCsrfTokenRepository)
+//                .csrfTokenRequestHandler(x)
+//        );
 
         http.csrf(AbstractHttpConfigurer::disable);
 
@@ -84,7 +85,7 @@ public class SecurityConfig {
 //                s.sessionFixation(SessionManagementConfigurer.SessionFixationConfigurer::newSession));
 
 
-        http.exceptionHandling(ex -> ex.accessDeniedPage("/login"));
+        http.exceptionHandling(ex -> ex.accessDeniedPage("/micro-core/loginx"));
 
 
         return http.build();

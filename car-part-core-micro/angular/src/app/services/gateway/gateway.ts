@@ -65,7 +65,7 @@ export class Gateway {
   }
 
   getPartsPaginatedWithFilter(partFilterRequest: PartFilterRequest) {
-    return this.httpClient.post<PartResponse2Wrapper>(`${environment.apiUrl}/part/filter2`, partFilterRequest);
+    return this.httpClient.post<PartResponse2Wrapper>(`${environment.apiUrl}/part/core-micro/filter2`, partFilterRequest);
   }
 
 }

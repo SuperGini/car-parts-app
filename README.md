@@ -154,6 +154,7 @@ spring:
 ## How to generate interfaces in Angular using .yaml files and openapi generator:
 how to use open-pai angular cli generator:
 ````
+https://openapi-generator.tech/docs/installation -> instalation
 https://openapi-generator.tech/docs/usage
 ````
 
@@ -181,3 +182,22 @@ ng build --configuration local
 To run all the project in the same window of the Intellij IDEa IDE go to the Maven icon
 on the right side and push the  + button and then select the directory car-part-front-micro
 and car-part-core-micro and then save.
+
+# Deploy to Minikube:
+
+- write dockerfile
+```dockerfile
+FROM eclipse-temurin:21-alpine-3.21
+
+COPY target/*.jar app.jar
+
+ENTRYPOINT ["java","-jar","/app.jar"]
+```
+- create docker image:
+```
+1.Create docker image: docker build -t car-part-core-micro:1 .
+2.Rename docker image: docker tag car-part-core-micro:1 ginitoru/car-part-core-micro:1
+3.Push docker image to Dockerhub: docker push ginitoru/car-part-core-micro:1
+4.See veurnelabilities on the image: docker scout quickview ginitoru/car-part-core-micro:1
+5.Recomandation: docker scout recommendations: ginitoru/car-part-core-micro:
+```

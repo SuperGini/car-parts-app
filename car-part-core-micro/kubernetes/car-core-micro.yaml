@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: car-core-micro-deployment
+  labels:
+    app: title
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: car-core-micro
+  template:
+    metadata:
+      labels:
+        app: car-core-micro
+    spec:
+      containers:
+        - name: car-core-micro-container
+          image: ginitoru/car-core-micro:8
+          ports:
+            - containerPort: 9090
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              port: 9090
+              path: /actuator/health/liveness
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: minikube
+            - name: CLIENT_SECRET
+              value: yMfPaIAvGZjo8RoqgGsdKNBy1JTqcLbx
+            - name: KEYCLOAK_URI
+              value: "127.0.0.1"
+            - name: KEYCLOAK_PORT
+              value: "8080"
+            - name: INTERNAL_KEYCLOAK_URI
+              value: "keycloak.default"
+            - name: INTERNAL_KEYCLOAK_PORT
+              value: "8080"
+            - name: SPRING_DATASOURCE_USERNAME
+              value: 'ginitoru'
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: '1234'
+            - name: DB_HOST
+              value: 'postgresql-service.default'
+            - name: DB_PORT
+              value: '5432'
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: car-core-micro-service
+spec:
+  selector:
+    app: car-core-micro
+  ports:
+    - port: 9090
+      protocol: TCP
+      targetPort: 9090
+  type: LoadBalancer
+
+
