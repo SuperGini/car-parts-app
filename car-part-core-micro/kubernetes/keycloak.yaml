@@ -33,6 +33,7 @@ spec:
         - name: keycloak
           image: quay.io/keycloak/keycloak:18.0
           args: ["start-dev"]
+#          args: ["start"]
           env:
             - name: KEYCLOAK_ADMIN
               value: "admin"
@@ -40,6 +41,16 @@ spec:
               value: "admin"
             - name: KC_PROXY
               value: "edge"
+            - name: KC_DB
+              value: postgres
+            - name: KC_DB_URL
+              value: jdbc:postgresql://postgresql-service.default:5432/keycloak
+#            - name: KC_DB_URL
+#              value: jdbc:postgresql://$(postgresql-service):5432/warehouse
+            - name: KC_DB_USERNAME
+              value: 'ginitoru'
+            - name: KC_DB_PASSWORD
+              value: '1234'
           ports:
             - name: http
               containerPort: 8080
@@ -48,24 +59,3 @@ spec:
               path: /realms/master
               port: 8080
           command: ["/opt/keycloak/bin/kc.sh"]
-
----
-#apiVersion: networking.k8s.io/v1
-#kind: Ingress
-#metadata:
-#  name: keycloak
-#spec:
-#  tls:
-#    - hosts:
-#        - keycloak.local
-#  rules:
-#    - host: keycloak.local
-#      http:
-#        paths:
-#          - path: /
-#            pathType: Prefix
-#            backend:
-#              service:
-#                name: keycloak
-#                port:
-#                  number: 8080

@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: car-front-container
-          image: ginitoru/car-front:6
+          image: ginitoru/car-front:7
           ports:
             - containerPort: 9091
               protocol: TCP
@@ -30,11 +30,11 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: minikube
             - name: SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT_SECRET
-              value: 9y9YPvRmRzIzLbIXEYLpat4HKJSmG37Y
+              value: 6QEy9MsnOA7solOYpOrbSRphNzLiigYt
             - name: KEYCLOAK_URI
-              value: "127.0.0.1"
-            - name: KEYCLOAK_PORT
-              value: "8080"
+              value: "keycloak.ro"
+#            - name: KEYCLOAK_PORT
+#              value: "8080"
             - name: INTERNAL_KEYCLOAK_URI
               value: "keycloak.default"
             - name: INTERNAL_KEYCLOAK_PORT

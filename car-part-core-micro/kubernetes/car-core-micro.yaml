@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: car-core-micro-container
-          image: ginitoru/car-core-micro:8
+          image: ginitoru/car-core-micro:9
           ports:
             - containerPort: 9090
               protocol: TCP
@@ -30,9 +30,9 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: minikube
             - name: CLIENT_SECRET
-              value: yMfPaIAvGZjo8RoqgGsdKNBy1JTqcLbx
+              value: L3hYAfhZu8RMGKa4fBxYk76bvu5oE3Hq
             - name: KEYCLOAK_URI
-              value: "127.0.0.1"
+              value: "keycloak.ro"
             - name: KEYCLOAK_PORT
               value: "8080"
             - name: INTERNAL_KEYCLOAK_URI

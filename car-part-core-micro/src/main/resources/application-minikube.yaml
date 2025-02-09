@@ -81,7 +81,7 @@ spring:
         provider:
           keycloak:
             user-name-attribute: username
-            authorization-uri: http://${KEYCLOAK_URI}:${KEYCLOAK_PORT}/realms/GINI/protocol/openid-connect/auth #to be accessd outside on minikube
+            authorization-uri: http://${KEYCLOAK_URI}/realms/GINI/protocol/openid-connect/auth #to be accessd outside on minikube
             token-uri: http://${INTERNAL_KEYCLOAK_URI}:${INTERNAL_KEYCLOAK_PORT}/realms/GINI/protocol/openid-connect/token # it will be accessed inside minikube
 #            user-info-uri: http://${INTERNAL_KEYCLOAK_URI}:${INTERNAL_KEYCLOAK_PORT}/realms/GINI/protocol/openid-connect/userinfo
             jwk-set-uri: http://${INTERNAL_KEYCLOAK_URI}:${INTERNAL_KEYCLOAK_PORT}/realms/GINI/protocol/openid-connect/certs

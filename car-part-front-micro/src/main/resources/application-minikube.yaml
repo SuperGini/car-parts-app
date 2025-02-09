@@ -31,7 +31,7 @@ spring:
         provider:
           keycloak:
             user-name-attribute: preferred_username
-            authorization-uri: http://${KEYCLOAK_URI}:${KEYCLOAK_PORT}/realms/GINI/protocol/openid-connect/auth
+            authorization-uri: http://${KEYCLOAK_URI}/realms/GINI/protocol/openid-connect/auth
             token-uri: http://${INTERNAL_KEYCLOAK_URI}:8080/realms/GINI/protocol/openid-connect/token
 #            user-info-uri: http://${INTERNAL_KEYCLOAK_URI}:${INTERNAL_KEYCLOAK_PORT}/realms/GINI/protocol/openid-connect/userinfo
             jwk-set-uri: http://${INTERNAL_KEYCLOAK_URI}:${INTERNAL_KEYCLOAK_PORT}/realms/GINI/protocol/openid-connect/certs
