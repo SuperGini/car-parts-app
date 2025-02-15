@@ -198,6 +198,18 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 1.Create docker image: docker build -t car-part-core-micro:1 .
 2.Rename docker image: docker tag car-part-core-micro:1 ginitoru/car-part-core-micro:1
 3.Push docker image to Dockerhub: docker push ginitoru/car-part-core-micro:1
-4.See veurnelabilities on the image: docker scout quickview ginitoru/car-part-core-micro:1
+4.See vurnelabilities on the image: docker scout quickview ginitoru/car-part-core-micro:1
 5.Recomandation: docker scout recommendations: ginitoru/car-part-core-micro:
+```
+
+### createIngress yaml file 
+```
+Enable ingress: minikube addons enable ingress
+Enable DNS: minikube addons enable ingress-dns
+Example: https://stackoverflow.com/questions/58561682/minikube-with-ingress-example-not-working
+
+Add this to: C:\Windows\System32\drivers\etc\hosts so it can map the IP to DNS
+127.0.0.1 car.core.ro
+127.0.0.1 car.front.ro
+127.0.0.1 keycloak.ro
 ```
