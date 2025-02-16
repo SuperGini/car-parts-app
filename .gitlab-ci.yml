@@ -1,0 +1,2 @@
+include:
+  - car-part-core-micro/.gitlab-ci.yml
