@@ -15,6 +15,7 @@ build app:
       - ./target/*.jar
   script:
     - cd car-part-core-micro
+    - chmod +x mvnw
     - ./mvnw package -DskipTests
 
 test:
@@ -22,6 +23,7 @@ test:
   image: eclipse-temurin:21-jdk-alpine-3.21
   script:
     - cd car-part-core-micro
+    - chmod +x mvnw
     - ./mvnw test
 
 
