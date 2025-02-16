@@ -14,12 +14,14 @@ build app:
     paths:
       - ./target/*.jar
   script:
+    - cd car-part-core-micro
     - ./mvnw package -DskipTests
 
 test:
   stage: test-stage
   image: eclipse-temurin:21-jdk-alpine-3.21
   script:
+    - cd car-part-core-micro
     - ./mvnw test
 
 
