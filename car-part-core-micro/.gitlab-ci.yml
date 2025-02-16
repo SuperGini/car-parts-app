@@ -11,10 +11,8 @@ build app:
   stage: build-stage
   image: eclipse-temurin:21-jdk-alpine-3.21
   artifacts:
-    script:
-      - cd car-part-core-micro
     paths:
-      - ./target/*.jar
+      - ./car-part-core-micro/target/*.jar
   script:
     - cd car-part-core-micro
     - chmod +x mvnw
