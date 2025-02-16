@@ -21,3 +21,7 @@ test:
   image: eclipse-temurin:21-jdk-alpine-3.21
   script:
     - ./mvnw test
+
+
+
+
