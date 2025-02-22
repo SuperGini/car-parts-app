@@ -1,3 +1,13 @@
+## Car-parts-app
+A small application that uses OAUTH 2.0 + OIDC and SSO to log users to the app and retrieve information.
+Is used to save car parts in a database and display it to the user.
+Car-part-core-micro - used to save car parts in the database
+Car-part-front-micro - used to display the parts information to the users of the app.
+
+![sso.png](sso.png)
+
+
+
 ## Creating the database:
 
 ### 1. Run the docker-compose file to generate the PostgresSQL container
@@ -123,7 +133,7 @@ Dependencies need it for Blaze persistence are:
 </dependency>
 ````
 
-#ANGULAR
+# ANGULAR
 in order to use angular material you need to add it to the Angular app:
 Go to the Angular parent directory (where angular.json is) and run the command:
 ````
@@ -202,7 +212,7 @@ ENTRYPOINT ["java","-jar","/app.jar"]
 5.Recomandation: docker scout recommendations: ginitoru/car-part-core-micro:
 ```
 
-### createIngress yaml file 
+### create Ingress yaml file 
 ```
 Enable ingress: minikube addons enable ingress
 Enable DNS: minikube addons enable ingress-dns
@@ -213,3 +223,19 @@ Add this to: C:\Windows\System32\drivers\etc\hosts so it can map the IP to DNS
 127.0.0.1 car.front.ro
 127.0.0.1 keycloak.ro
 ```
+## finalize deployment
+The images of the app is uploaded to dockerhub.com
+From the console go to each kubernetes file of each app and run the command for each yaml file.
+````
+kubectl apply -f care-core-micro.yaml
+run this command for each yaml file in the kubernetes folder.
+You will need to have a minikube app running.
+````
+
+
+### Gitlab ci-cd
+This files are used to run the pipeline and deploy the docker image in the gitlab container registry.
+<br/>
+car-part-core-micro - [.gitlab-ci.yml](car-part-core-micro/.gitlab-ci.yml)
+<br/>
+car-part-front-micro - [.gitlab-ci.yml](.gitlab-ci.yml)
