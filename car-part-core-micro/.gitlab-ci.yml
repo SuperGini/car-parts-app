@@ -3,13 +3,13 @@ services:
   - docker:dind
 
 stages:
-  - build-angular
+  - build-angular-stage
   - build-stage
   - test-stage
-  - build-docker-image
+  - build-docker-image-stage
 
 build angular:
-  stage: build-angular
+  stage: build-angular-stage
   image: node:latest
   script:
     - cd ./car-part-core-micro/angular
@@ -35,7 +35,7 @@ test:
     - chmod +x mvnw
     - ./mvnw test
 build docker image:
-  stage: build-docker-image
+  stage: build-docker-image-stage
   script:
     - cd ./car-part-core-micro
 #    - docker build -t registry.gitlab.com/car-app/car-part-core-micro$CI_PIPELINE_IID .
@@ -43,8 +43,8 @@ build docker image:
 #    - docker push registry.gitlab.com/car-app/car-part-core-micro$CI_PIPELINE_IID
 #    - docker login registry.gitlab.com
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    - docker build -t registry.gitlab.com/car-app-gini/car-part-core-micro .
-    - docker push registry.gitlab.com/car-app-gini/car-part-core-micro
+    - docker build -t registry.gitlab.com/car-app-gini/car-part-core-micro:$CI_PIPELINE_IID .
+    - docker push registry.gitlab.com/car-app-gini/car-part-core-micro:$CI_PIPELINE_IID
 
 
 
