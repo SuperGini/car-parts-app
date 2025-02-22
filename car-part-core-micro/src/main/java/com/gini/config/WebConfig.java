@@ -21,4 +21,5 @@ public class WebConfig  {
 //    public void addViewControllers(ViewControllerRegistry registry) {
 //        registry.addViewController("/**").setViewName("forward:/index.html");
 //    }
+
 }
