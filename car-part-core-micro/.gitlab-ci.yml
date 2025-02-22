@@ -3,9 +3,18 @@ services:
   - docker:dind
 
 stages:
+  - build-angular
   - build-stage
   - test-stage
   - build-docker-image
+
+build angular:
+  stage: build-angular
+  image: node:latest
+  script:
+    - cd ./car-part-core-micro/angular
+    - npm install
+    - ng build
 
 build app:
   stage: build-stage
