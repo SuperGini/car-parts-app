@@ -9,7 +9,7 @@ stages:
   - front-build-docker-image-stage
 
 build angular:
-  stage: build-angular-stage
+  stage: front-build-angular-stage
   image: node:latest
   script:
     - cd ./car-part-front-micro/angular
@@ -17,7 +17,7 @@ build angular:
     - npm run build
 
 build app:
-  stage: build-stage
+  stage: front-build-stage
   image: eclipse-temurin:21-jdk-alpine-3.21
   artifacts:
     paths:
@@ -28,14 +28,14 @@ build app:
     - ./mvnw package -DskipTests
 
 test:
-  stage: test-stage
+  stage: front-test-stage
   image: eclipse-temurin:21-jdk-alpine-3.21
   script:
     - cd ./car-part-front-micro
     - chmod +x mvnw
     - ./mvnw test
 build docker image:
-  stage: build-docker-image-stage
+  stage: front-build-docker-image-stage
   script:
     - cd ./car-part-core-micro
 #    - docker build -t registry.gitlab.com/car-app/car-part-core-micro$CI_PIPELINE_IID .
