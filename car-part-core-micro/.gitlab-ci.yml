@@ -34,8 +34,8 @@ build docker image:
 #    - docker push registry.gitlab.com/car-app/car-part-core-micro$CI_PIPELINE_IID
 #    - docker login registry.gitlab.com
     - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
-    - docker build -t registry.gitlab.com/car-app-gini/car-part-core-micro$CI_PIPELINE_IID .
-    - docker push registry.gitlab.com/car-app-gini/car-part-core-micro$CI_PIPELINE_IID
+    - docker build -t registry.gitlab.com/car-app-gini/car-part-core-micro .
+    - docker push registry.gitlab.com/car-app-gini/car-part-core-micro
 
 
 
