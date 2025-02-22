@@ -14,7 +14,7 @@ build angular:
   script:
     - cd ./car-part-core-micro/angular
     - npm install
-    - ng build
+    - npm run build
 
 build app:
   stage: build-stage
