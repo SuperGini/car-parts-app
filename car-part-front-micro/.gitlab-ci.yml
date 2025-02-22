@@ -1,0 +1,52 @@
+image: docker:latest
+services:
+  - docker:dind
+
+stages:
+  - front-build-angular-stage
+  - front-build-stage
+  - front-test-stage
+  - front-build-docker-image-stage
+
+build angular:
+  stage: build-angular-stage
+  image: node:latest
+  script:
+    - cd ./car-part-front-micro/angular
+    - npm install
+    - npm run build
+
+build app:
+  stage: build-stage
+  image: eclipse-temurin:21-jdk-alpine-3.21
+  artifacts:
+    paths:
+      - ./car-part-front-micro/target/*.jar
+  script:
+    - cd car-part-front-micro
+    - chmod +x mvnw
+    - ./mvnw package -DskipTests
+
+test:
+  stage: test-stage
+  image: eclipse-temurin:21-jdk-alpine-3.21
+  script:
+    - cd ./car-part-front-micro
+    - chmod +x mvnw
+    - ./mvnw test
+build docker image:
+  stage: build-docker-image-stage
+  script:
+    - cd ./car-part-core-micro
+#    - docker build -t registry.gitlab.com/car-app/car-part-core-micro$CI_PIPELINE_IID .
+#    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER --password-stdin $CI_REGISTRY
+#    - docker push registry.gitlab.com/car-app/car-part-core-micro$CI_PIPELINE_IID
+#    - docker login registry.gitlab.com
+    - echo $CI_REGISTRY_PASSWORD | docker login -u $CI_REGISTRY_USER $CI_REGISTRY --password-stdin
+    - docker build -t registry.gitlab.com/car-app-gini/car-part-front-micro:$CI_PIPELINE_IID .
+    - docker push registry.gitlab.com/car-app-gini/car-part-front-micro:$CI_PIPELINE_IID
+
+
+
+
+
